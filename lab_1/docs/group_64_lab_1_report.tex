@@ -1,0 +1,179 @@
+%% Determines the type of document (including standard settings for layout).
+\documentclass[letterpaper]{article}
+
+
+
+%% Package to control the size of a page: the standard margins used by LaTeX are
+%% very wide!
+\usepackage[margin=1in]{geometry}
+
+
+%% Packages add functionality to the document. The AMS packages are standard
+%% packages to support various mathematical notations. AMS stands for American
+%% Mathematical Society, the organization that maintains these packages.
+\usepackage{amsmath,amsthm,amssymb}
+
+%% Theorems-like environments using functionality provided by amsthm.
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+    %% [section] at the end specifies that theorems should be numbered
+    %% per-section: Section x starts with theorem-like x.1 and so on, ...
+\newtheorem{proposition}[theorem]{Proposition}
+    %% [theorem] in the middle specifies: use the same counter as the theorem
+    %% environment: here we number all theorem-like environments consecutively.
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+
+%% Support for nicely formatted tables.
+\usepackage{booktabs}
+
+
+%% Support for colors & colors in tables.
+\usepackage[table]{xcolor}
+
+% Seven colors safe for use color blindness.
+% Colors taken from doi:10.1038/nmeth.1618.
+\definecolor{cbOrange}{RGB}{230,159,0}
+\definecolor{cbSkyBlue}{RGB}{86,180,233}
+\definecolor{cbBluishGreen}{RGB}{0,158,115}
+\definecolor{cbYellow}{RGB}{240,228,66}
+\definecolor{cbBlue}{RGB}{0,114,178}
+\definecolor{cbVermillion}{RGB}{213,94,0}
+\definecolor{cbReddischPurple}{RGB}{204,121,167}
+
+
+%% Notation used in this document.
+\newcommand{\n}{\mathbf{n}} %% Num. Replicas.
+\newcommand{\f}{\mathbf{f}} %% Num. Faulty Replicas.
+
+%% Misc. Math notation.
+\newcommand{\BigO}{\mathcal{O}}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\AName}[1]{\textsc{#1}}
+\newcommand{\Var}[1]{\texttt{#1}}
+
+
+%% Algorithms.
+\usepackage{algorithm}
+\usepackage[noend]{algorithmic}
+\newcommand{\GETS}{:=}
+
+
+%% Formatting SI-units.
+\usepackage{siunitx}
+\sisetup{per-mode=symbol}
+
+
+%% TikZ: for creating figures.
+\usepackage{tikz}
+
+%% Configuration for figures: Nicer arrows.
+\usetikzlibrary{arrows.meta}
+\tikzset{>=Stealth}
+
+
+%% pgfplots: drawing plots using TikZ.
+\usepackage{pgfplots}
+%% Configuration for plots: Use color-blind friendly colors.
+\pgfplotscreateplotcyclelist{cbSafeList}{
+    very thick,solid,cbOrange,every mark/.append style={solid},mark=*\\
+    very thick,solid,cbSkyBlue,every mark/.append style={solid},mark=*\\
+    very thick,solid,cbBluishGreen,every mark/.append style={solid},mark=*\\
+    very thick,solid,cbYellow,every mark/.append style={solid},mark=*\\
+    very thick,solid,cbBlue,every mark/.append style={solid},mark=*\\
+    very thick,solid,cbVermillion,every mark/.append style={solid},mark=*\\
+    very thick,solid,cbReddischPurple,every mark/.append style={solid},mark=*\\
+    very thick,solid,black,every mark/.append style={solid},mark=*\\
+}
+\pgfplotsset{
+    legend style={font=\small},
+    compat=1.16,
+    width=260pt,
+    height=140pt,
+    legend cell align=left,
+    xlabel near ticks,
+    ylabel near ticks,
+    every axis/.append style={
+        cycle list name=cbSafeList,
+        ymin=0,
+        enlargelimits=0.05,
+        mark size=1pt,
+        ylabel style={align=center},
+        xlabel style={align=center},
+        title style={align=center}
+    }
+}
+
+%% PgfplotsTable: loading data files to use with pgfplots.
+\usepackage{pgfplotstable}
+
+
+%% Support for hyperlinks and urls. The setting ``colorlinks'' sets how links
+%% are shown in the document (with a color, without underline). We put hyperref
+%% last---it has a tendency to break other packages when loaded before them.
+\usepackage[colorlinks]{hyperref}
+\usepackage{graphicx}
+\usepackage{pgffor}
+\usepackage{caption}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+
+\title{Assignment}
+\author{Luca Mawyin - 400531739}
+\date{\today}
+
+\begin{document}
+
+\begin{titlepage}
+
+    \thispagestyle{empty}
+    \centering
+    \vspace*{3em}
+
+    \Huge{COMPSCI 2XC3 Lab Report 1}\\[1em]
+    \Large Version 1.0\\[0.5em]
+    \Large Prepared by\\[2em]
+    \Large Group 64\\[2em] 
+
+    \LARGE Luca Mawyin\\[0.5em]
+    \LARGE Anderson Ray\\[0.5em]
+    \LARGE Theo Pham\\[2em]
+    
+    \Large COMPSCI 2ME3 \\[0.5em]
+    \Large McMaster University\\[2em]     
+    \Large \today\\[2cm]
+
+\end{titlepage}
+
+\stepcounter{section}
+\section*{Experiment \thesection}
+
+\stepcounter{section}
+\section*{Experiment \thesection}
+
+\stepcounter{section}
+\section*{Experiment \thesection}
+
+\stepcounter{section}
+\section*{Experiment \thesection}
+
+\stepcounter{section}
+\section*{Experiment \thesection}
+
+\stepcounter{section}
+\section*{Experiment \thesection}
+
+\stepcounter{section}
+\section*{Experiment \thesection}
+
+\stepcounter{section}
+\section*{Experiment \thesection}
+
+\end{document}

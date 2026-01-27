@@ -2,8 +2,27 @@
 This file corresponds to the first graded lab of 2XC3.
 Feel free to modify and/or add functions to this file.
 """
+import time
+import matplotlib.pyplot as plt
+import numpy as np
 import random
 
+def run():
+    runtimes = []
+    L = [create_random_list(1000, 100000) for _ in range(1000)]
+
+    for i in range(len(L)):
+
+        start = time.perf_counter()
+        insertion_sort(L[i])
+        end = time.perf_counter()
+
+        runtimes.append(end - start)
+
+    plt.plot(range(1,1001), runtimes)
+    plt.xlabel("Run number")
+    plt.ylabel("Time (seconds)")
+    plt.show()
 
 # Create a random list length "length" containing whole numbers between 0 and max_value inclusive
 def create_random_list(length, max_value):
@@ -86,3 +105,6 @@ def find_min_index(L, n):
         if L[i] < L[min_index]:
             min_index = i
     return min_index
+
+if __name__ == '__main__':
+    run()
