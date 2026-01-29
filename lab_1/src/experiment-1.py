@@ -15,7 +15,7 @@ def run():
         (good_sorts.heapsort, "Heap Sort")
     ]
     
-    rng = range(0, 1000,5) 
+    rng = range(0, 1000,10) 
     
     plt.figure(figsize=(10, 6))
 
@@ -35,6 +35,7 @@ def run():
         
 
     plt.title("Sorting Algorithm Performance Comparison")
+    plt.yscale('log')
     plt.xlabel("List Length (n)")
     plt.ylabel("Time (seconds)")
     plt.legend()
