@@ -10,52 +10,6 @@ In contains traditional implementations for:
 Author: Vincent Maccio
 """
 
-import time
-import matplotlib.pyplot as plt
-import numpy as np
-import random
-import math
-
-# Graphing runtime of algorithms
-def run():
-    runtimes = []
-    L = [create_random_list(1000, 100000) for _ in range(1000)]
-
-    for i in range(len(L)):
-
-        start = time.perf_counter()
-        quicksort(L[i])
-        end = time.perf_counter()
-
-        runtimes.append(end - start)
-
-    plt.plot(range(1,1001), runtimes)
-    plt.xlabel("Run number")
-    plt.ylabel("Time (seconds)")
-    plt.show()
-
-
-# Create a random list length "length" containing whole numbers between 0 and max_value inclusive
-def create_random_list(length, max_value):
-    return [random.randint(0, max_value) for _ in range(length)]
-
-
-# Creates a near sorted list by creating a random list, sorting it, then doing a random number of swaps
-def create_near_sorted_list(length, max_value, swaps):
-    L = create_random_list(length, max_value)
-    L.sort()
-    for _ in range(swaps):
-        r1 = random.randint(0, length - 1)
-        r2 = random.randint(0, length - 1)
-        swap(L, r1, r2)
-    return L
-
-
-# I have created this function to make the sorting algorithm code read easier
-def swap(L, i, j):
-    L[i], L[j] = L[j], L[i]
-
-
 # ************ Quick Sort ************
 def quicksort(L):
     copy = quicksort_copy(L)
@@ -192,7 +146,4 @@ class Heap:
         return s
 
 # *************************************
-
-if __name__ == '__main__':
-    run()
     
