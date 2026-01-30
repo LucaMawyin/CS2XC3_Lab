@@ -154,7 +154,18 @@
 
 \stepcounter{section}
 \section*{Experiment \thesection}
+In our experiment comparing Bubble Sort, Insertion Sort, and Selection Sort. We ran 100 tests for each sorting algorithm going from a list length of 0, to a list length of 1000 each list length being 10 elements longer then the last.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figure_1.png}
+    \caption{List Length vs. Time (ms) for Bubble, Selection, and Insertion Sort.}
+    \label{fig:sort_graph}
+\end{figure}
+
+Looking at the slopes, each algorithm looks to have a parabolic shape which makes sense as we know that the algorithms used are $O(n^2)$.
+
+Bubble sort is the slowest as the inner loop, loops through the entire list every iteration of the outer loop. Selection sort is faster then Insertion sort as swaps elements in the list smarter using less memory reads and writes making it faster.
 \stepcounter{section}
 \section*{Experiment \thesection}
 
