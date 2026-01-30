@@ -124,6 +124,7 @@
 \usepackage{tabularx}
 \usepackage{enumitem}
 \usepackage{fancyhdr}
+\usepackage{float}
 
 \title{Assignment}
 \author{Luca Mawyin - 400531739}
@@ -171,7 +172,18 @@ Bubble sort is the slowest as the inner loop, loops through the entire list ever
 
 \stepcounter{section}
 \section*{Experiment \thesection}
+In our experiment comparing Bubble Sort, Insertion Sort, and Selection Sort on sorted lists with varying numbers of swaps made. We ran 301 tests for each sorting algorithm on lists of size 2000 with the number of swaps ranging from 0 - 30179. Each test would increase the number of swaps made by 100.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figure_3.png}
+    \caption{List Length vs. Number of Swaps on a Sorted List for Bubble, Selection, and Insertion Sort.}
+    \label{fig:sort_graph_swaps}
+\end{figure}
+
+Looking at the graph, Bubble Sort and Insertion Sort preform better with less swaps. Bubble Sort preforms better with less swaps, as its doing much less memory reads and writes in the innerloop. Insertion swap preforms better with less swaps as it exits out the second loop if it runs into sorted pairs of elements which are more common with less swaps.
+
+Selection Sort doesn't perform better with less swaps as the number of checks and swaps are independent of whether the list is sorted or not. Even if the innerloop can't find a min index past L[i] it still swaps L[i] with itself.
 \stepcounter{section}
 \section*{Experiment \thesection}
 
