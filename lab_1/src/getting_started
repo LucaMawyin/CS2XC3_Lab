@@ -1,0 +1,5 @@
+Create experiment file in experiment directory (Make sure it's numbered)
+
+Open terminal and cd to src folder. Run:
+
+python -m experiments.experiment_(experiment number)

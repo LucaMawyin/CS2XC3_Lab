@@ -1,4 +1,5 @@
-import bad_sorts
+from sorting import bad_sorts as bs
+from sorting import good_sorts as gs
 
 import time
 import matplotlib.pyplot as plt
@@ -6,9 +7,9 @@ import matplotlib.pyplot as plt
 
 def run():
     algorithms = [
-        (bad_sorts.insertion_sort, "Insertion Sort"),
-        (bad_sorts.bubble_sort, "Bubble Sort"),
-        (bad_sorts.selection_sort, "Selection Sort")
+        (gs.quicksort_copy, "Quick Sort"),
+        (gs.mergesort, "Merge Sort"),
+        (gs.heapsort, "Heap Sort")
     ]
     
     rng = range(0, 1000,10) 
@@ -20,7 +21,7 @@ def run():
         runtimes = []
         print("testing",label,"...")
         for i in rng:
-            L = bad_sorts.create_random_list(i, 100000)
+            L = bs.create_random_list(i, 100000)
             
             start = time.perf_counter() * time_factor
             sort_func(L)

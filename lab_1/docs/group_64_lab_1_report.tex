@@ -125,10 +125,6 @@
 \usepackage{enumitem}
 \usepackage{fancyhdr}
 
-\title{Assignment}
-\author{Luca Mawyin - 400531739}
-\date{\today}
-
 \begin{document}
 
 \begin{titlepage}
@@ -138,7 +134,6 @@
     \vspace*{3em}
 
     \Huge{COMPSCI 2XC3 Lab Report 1}\\[1em]
-    \Large Version 1.0\\[0.5em]
     \Large Prepared by\\[2em]
     \Large Group 64\\[2em] 
 
@@ -152,38 +147,70 @@
 
 \end{titlepage}
 
+% Experiment 1
 \stepcounter{section}
 \section*{Experiment \thesection}
 In our experiment comparing Bubble Sort, Insertion Sort, and Selection Sort. We ran 100 tests for each sorting algorithm going from a list length of 0, to a list length of 1000 each list length being 10 elements longer then the last.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{Figure_1.png}
-    \caption{List Length vs. Time (ms) for Bubble, Selection, and Insertion Sort.}
-    \label{fig:sort_graph}
+    \includegraphics[width=0.8\textwidth]{figures/Figure_\thesection.png}
+    \caption{List Length vs. Time (ms) for Bubble, Selection, and Insertion Sort}
+    \label{fig:sort_graph_\thesection}
 \end{figure}
 
-Looking at the slopes, each algorithm looks to have a parabolic shape which makes sense as we know that the algorithms used are $O(n^2)$.
+Looking at the slopes, each algorithm looks to have a parabolic shape which makes sense as we know that the algorithms used are $\BigO(n^2)$.
 
 Bubble sort is the slowest as the inner loop, loops through the entire list every iteration of the outer loop. Selection sort is faster then Insertion sort as swaps elements in the list smarter using less memory reads and writes making it faster.
+
+% Experiment 2
 \stepcounter{section}
 \section*{Experiment \thesection}
 
+% Experiment 3
 \stepcounter{section}
 \section*{Experiment \thesection}
 
+% Experiment 4
 \stepcounter{section}
 \section*{Experiment \thesection}
 
+For this experiment, we compared the runtime of Quick Sort, Merge Sort, and Heap Sort. There were 100 tests run for each algorithm, with increasing list sizes from 0 to 1000, incrementing the list length by 10 each iteration.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Figure_\thesection.png}
+    \caption{List Length vs. Time (ms) for Quick, Merge, and Heap Sort}
+    \label{fig:sort_graph_\thesection}
+\end{figure}
+
+Observing the resulting runtimes of each algorithm, they appear to be near-linear with a slight curve. This is an accurate depiction as each of the sorting algorithms represented have a runtime of $\BigO(n\log{n})$
+
+Heap Sort is the slowest sorting algorithm due to the constant overhead required in heap maintenance. Merge Sort is slower than Quick Sort due to the increased overhead of copying elements, along with having to zip sorted partitions of lists together, as opposed to centering the sort around a pivot and copying elements less. 
+% Experiment 5
 \stepcounter{section}
 \section*{Experiment \thesection}
 
+In this experiment, Quick Sort, Merge Sort, and Heap Sort were compared using near-sorted lists of length 1000. There were 100 tests run for each algorithm, with an increasing number of swaps on an already-sorted list. The number of swaps ranged from 0 to 500, with an incrementation of 5. Furthermore, each increment was executed 5 times, with the runtime averaged out in order to guarantee a higher accuracy.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Figure_\thesection.png}
+    \caption{Swaps vs. Time (ms) for Quick, Merge, and Heap Sort}
+    \label{fig:sort_graph_\thesection}
+\end{figure}
+
+Observing the runtime of each algorithm on sorted lists relative to the number of swaps performed, Quick Sort began to outperform the other sorting algorithms when the number of swaps reached 100. As a more general observation, the performance of Quick Sort was more appealing when the number of swaps was 10\% of the length of the list. This is likely due to the fact that having a swap rate of 10\% introduces enough randomness into the list to nearly guarantee that the first element in the list is substantially closer to the median value, or at the very least further from the least value of the list.
+
+% Experiment 6
 \stepcounter{section}
 \section*{Experiment \thesection}
 
+% Experiment 7
 \stepcounter{section}
 \section*{Experiment \thesection}
 
+% Experiment 8
 \stepcounter{section}
 \section*{Experiment \thesection}
 
