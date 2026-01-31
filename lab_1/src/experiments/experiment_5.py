@@ -1,8 +1,7 @@
 from sorting import bad_sorts as bs
 from sorting import good_sorts as gs
+
 import sys
-
-
 import time
 import matplotlib.pyplot as plt
 

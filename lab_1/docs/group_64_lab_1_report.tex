@@ -175,7 +175,7 @@ Bubble sort is the slowest as the inner loop, loops through the entire list ever
 \stepcounter{section}
 \section*{Experiment \thesection}
 
-For this experiment, we compared the runtime of Quick Sort, Merge Sort, and Heap Sort. There were 100 tests run for each algorithm, with increasing list sizes from 0 to 1000, incrementing the list length by 10 each iteration.
+For this experiment, we compared the runtime of Quick Sort, Merge Sort, and Heap Sort. There were 100 tests run for each algorithm, with increasing list sizes from 0 to 1000, incrementing the list length by ten each iteration.
 
 \begin{figure}[H]
     \centering
@@ -191,7 +191,7 @@ Heap Sort is the slowest sorting algorithm due to the constant overhead required
 \stepcounter{section}
 \section*{Experiment \thesection}
 
-In this experiment, Quick Sort, Merge Sort, and Heap Sort were compared using near-sorted lists of length 1000. There were 100 tests run for each algorithm, with an increasing number of swaps on an already-sorted list. The number of swaps ranged from 0 to 500, with an incrementation of 5. Furthermore, each increment was executed 5 times, with the runtime averaged out in order to guarantee a higher accuracy.
+In this experiment, Quick Sort, Merge Sort, and Heap Sort were compared using near-sorted lists of length 1000. There were 100 tests run for each algorithm, with an increasing number of swaps on an already-sorted list. The number of swaps ranged from 0 to 500, with an incrementation of five. Furthermore, each increment was executed five times, with the runtime averaged out in order to guarantee a higher accuracy.
 
 \begin{figure}[H]
     \centering
@@ -205,6 +205,17 @@ Observing the runtime of each algorithm on sorted lists relative to the number o
 % Experiment 6
 \stepcounter{section}
 \section*{Experiment \thesection}
+
+This experiment compares a typical Quick Sort to a Quick Sort variant that has two pivot points. The experiment was performed on lists of increasing sizes from 0 to 1000, incrementing the length by ten each iteration. Each iteration was performed five times, with the result being the average of the runtimes for improved accuracy.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Figure_\thesection.png}
+    \caption{Swaps vs. Time (ms) for Single and Dual Quick Sort}
+    \label{fig:sort_graph_\thesection}
+\end{figure}
+
+Observing the runtime, the difference between Quick Sort with a single pivot versus with a dual pivot does not seem substantial enough to warrant implementation. However, as the list lengths used in the experiment reached 1000 elements, even though the absolute values of runtimes between Quick Sort and Dual Quick Sort were approximately 0.1ms, this denotes a 20\% improvement in performance. Given the substantial improvement in relative performance, this implementation may prove useful with data sets of lengths that substantially exceed those used in the experiment.
 
 % Experiment 7
 \stepcounter{section}

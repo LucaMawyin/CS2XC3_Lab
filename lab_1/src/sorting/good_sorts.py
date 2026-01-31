@@ -9,6 +9,8 @@ In contains traditional implementations for:
 
 Author: Vincent Maccio
 """
+import sys
+sys.setrecursionlimit(5000)
 
 # ************ Quick Sort ************
 def quicksort(L):
@@ -28,6 +30,32 @@ def quicksort_copy(L):
         else:
             right.append(num)
     return quicksort_copy(left) + [pivot] + quicksort_copy(right)
+
+# *************************************
+
+# ********** Dual Quick Sort **********
+
+def dual_quicksort(L):
+    if len(L) < 2: return L
+
+    p0, p1 = (L[0], L[1]) if L[0] <= L[1] else (L[1], L[0])
+
+    left, middle, right = [], [], []
+
+    # Start on left and move forward - same logic as multi pivot
+    for i in L[2:]:
+        if i < p0: 
+            left.append(i)
+        elif i <= p1: 
+            middle.append(i)
+        else: 
+            right.append(i)
+
+    left_sorted = dual_quicksort(left)
+    right_sorted = dual_quicksort(right)
+    middle_sorted = dual_quicksort(middle)
+    
+    return left_sorted + [p0] + middle_sorted + [p1] + right_sorted
 
 # *************************************
 
