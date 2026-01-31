@@ -124,6 +124,7 @@
 \usepackage{tabularx}
 \usepackage{enumitem}
 \usepackage{fancyhdr}
+\usepackage{float}
 
 \begin{document}
 
@@ -170,6 +171,18 @@ Bubble sort is the slowest as the inner loop, loops through the entire list ever
 % Experiment 3
 \stepcounter{section}
 \section*{Experiment \thesection}
+In our experiment comparing Bubble Sort, Insertion Sort, and Selection Sort on sorted lists with varying numbers of swaps made. We ran 109 tests for each sorting algorithm on lists of size 2000 with the number of swaps ranging from 0 - 10965. Each test would increase the number of swaps made by 100.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Figure_3.png}
+    \caption{List Length vs. Number of Swaps on a Sorted List for Bubble, Selection, and Insertion Sort.}
+    \label{fig:sort_graph_swaps}
+\end{figure}
+
+Looking at the graph, Bubble Sort and Insertion Sort preform better with less swaps. Bubble Sort preforms better with less swaps, as its doing much less memory reads and writes in the innerloop. Insertion swap preforms better with less swaps as it exits out the second loop if it runs into sorted pairs of elements which are more common with less swaps.
+
+Selection Sort doesn't perform better with less swaps as the number of checks and swaps are independent of whether the list is sorted or not. Even if the innerloop can't find a min index past L[i] it still swaps L[i] with itself.
 
 % Experiment 4
 \stepcounter{section}
@@ -181,12 +194,13 @@ For this experiment, we compared the runtime of Quick Sort, Merge Sort, and Heap
     \centering
     \includegraphics[width=0.8\textwidth]{figures/Figure_\thesection.png}
     \caption{List Length vs. Time (ms) for Quick, Merge, and Heap Sort}
-    \label{fig:sort_graph_\thesection}
+    \label{fig:1sort_graph_\thesection}
 \end{figure}
 
 Observing the resulting runtimes of each algorithm, they appear to be near-linear with a slight curve. This is an accurate depiction as each of the sorting algorithms represented have a runtime of $\BigO(n\log{n})$
 
 Heap Sort is the slowest sorting algorithm due to the constant overhead required in heap maintenance. Merge Sort is slower than Quick Sort due to the increased overhead of copying elements, along with having to zip sorted partitions of lists together, as opposed to centering the sort around a pivot and copying elements less. 
+
 % Experiment 5
 \stepcounter{section}
 \section*{Experiment \thesection}
@@ -197,7 +211,7 @@ In this experiment, Quick Sort, Merge Sort, and Heap Sort were compared using ne
     \centering
     \includegraphics[width=0.8\textwidth]{figures/Figure_\thesection.png}
     \caption{Swaps vs. Time (ms) for Quick, Merge, and Heap Sort}
-    \label{fig:sort_graph_\thesection}
+    \label{fig:2sort_graph_\thesection}
 \end{figure}
 
 Observing the runtime of each algorithm on sorted lists relative to the number of swaps performed, Quick Sort began to outperform the other sorting algorithms when the number of swaps reached 100. As a more general observation, the performance of Quick Sort was more appealing when the number of swaps was 10\% of the length of the list. This is likely due to the fact that having a swap rate of 10\% introduces enough randomness into the list to nearly guarantee that the first element in the list is substantially closer to the median value, or at the very least further from the least value of the list.
@@ -212,7 +226,7 @@ This experiment compares a typical Quick Sort to a Quick Sort variant that has t
     \centering
     \includegraphics[width=0.8\textwidth]{figures/Figure_\thesection.png}
     \caption{Swaps vs. Time (ms) for Single and Dual Quick Sort}
-    \label{fig:sort_graph_\thesection}
+    \label{fig:3sort_graph_\thesection}
 \end{figure}
 
 Observing the runtime, the difference between Quick Sort with a single pivot versus with a dual pivot does not seem substantial enough to warrant implementation. However, as the list lengths used in the experiment reached 1000 elements, even though the absolute values of runtimes between Quick Sort and Dual Quick Sort were approximately 0.1ms, this denotes a 20\% improvement in performance. Given the substantial improvement in relative performance, this implementation may prove useful with data sets of lengths that substantially exceed those used in the experiment.
