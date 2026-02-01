@@ -266,6 +266,24 @@ Observing the runtime, the difference between Quick Sort with a single pivot ver
 \stepcounter{section}
 \section*{Experiment \thesection}
 
+In this experiment, we compared the traditional recursive implementation of Merge Sort with a bottom-up iterative version.
+The bottom-up approach eliminates recursion by iteratively merging sublists using an increasing window size.
+
+The experiment was conducted on randomly generated lists with lengths ranging from 0 to 5000, increasing by 50 each iteration.
+Each configuration was executed five times, and the minimum runtime was recorded to reduce noise from system interference.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Figure_7.png}
+    \caption{List Length vs. Time (ms) for recursive and bottom-up Merge Sort}
+    \label{fig:merge_exp7}
+\end{figure}
+
+As shown in Figure~\ref{fig:merge_exp7}, the bottom-up Merge Sort consistently outperforms the recursive version across all tested list sizes.
+The improvement is modest, as both implementations share the same $\BigO(n\log n)$ time complexity.
+Most of the runtime cost comes from the linear merging process rather than recursion overhead, which limits the overall performance gain of the iterative approach.
+
+
 % Experiment 8
 \stepcounter{section}
 \section*{Experiment \thesection}
