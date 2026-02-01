@@ -61,7 +61,7 @@ def dual_quicksort(L):
 
 
 # ************ Merge Sort *************
-
+# Original mergesort
 def mergesort(L):
     if len(L) <= 1:
         return
@@ -95,6 +95,50 @@ def merge(left, right):
                 L.append(right[j])
                 j += 1
     return L
+
+# Bottom up mergesort
+def bottom_up_mergesort(L):
+    n = len(L)
+    if n <= 1:
+        return
+
+    temp = [0] * n
+    width = 1
+
+    while width < n:
+        left = 0
+        while left < n:
+            mid = min(left + width, n)
+            right = min(left + 2 * width, n)
+
+            # merge L[left:mid] and L[mid:right] into temp
+            i, j, k = left, mid, left
+            while i < mid and j < right:
+                if L[i] <= L[j]:
+                    temp[k] = L[i]
+                    i += 1
+                else:
+                    temp[k] = L[j]
+                    j += 1
+                k += 1
+
+            while i < mid:
+                temp[k] = L[i]
+                i += 1
+                k += 1
+
+            while j < right:
+                temp[k] = L[j]
+                j += 1
+                k += 1
+
+            left += 2 * width
+
+        # copy back
+        for i in range(n):
+            L[i] = temp[i]
+
+        width *= 2
 
 # *************************************
 
