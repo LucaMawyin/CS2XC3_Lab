@@ -159,6 +159,7 @@
     \Large \today\\[2cm]
 
 \end{titlepage}
+
 \tableofcontents
 \newpage
 
@@ -253,7 +254,7 @@ The Bubble Sort variation yields a more noticeable improvement, while the Select
 \stepcounter{section}
 \section*{Experiment \thesection}
 \label{exp3}
-\addcontentsline{toc}{section}{Experiment 3: Performance comparison on near-sorted lists with varying numbers of swaps}
+\addcontentsline{toc}{section}{Experiment 3: Performance comparison on near sorted lists with varying numbers of swaps}
 
 In our experiment comparing Bubble Sort, Insertion Sort, and Selection Sort on sorted lists with varying numbers of swaps made. We ran 109 tests for each sorting algorithm on lists of size 2000 with the number of swaps ranging from 0 - 10965. Each test would increase the number of swaps made by 100.
 
@@ -292,7 +293,7 @@ Heap Sort is the slowest sorting algorithm due to the constant overhead required
 \stepcounter{section}
 \section*{Experiment \thesection}
 \label{exp5}
-\addcontentsline{toc}{section}{Experiment 5: Performance comparison on near-sorted lists for good sorting algorithms}
+\addcontentsline{toc}{section}{Experiment 5: Performance comparison on near sorted lists for good sorting algorithms}
 
 
 In this experiment, Quick Sort, Merge Sort, and Heap Sort were compared using near sorted lists of length 1000. There were 100 tests run for each algorithm, with an increasing number of swaps on an already-sorted list. The number of swaps ranged from 0 to 500, with an incrementation of five. Furthermore, each increment was executed five times, with the runtime averaged out in order to guarantee a higher accuracy.
@@ -310,7 +311,7 @@ Observing the runtime of each algorithm on sorted lists relative to the number o
 \stepcounter{section}
 \section*{Experiment \thesection}
 \label{exp6}
-\addcontentsline{toc}{section}{Experiment 6: Comparison of single-pivot and dual-pivot Quick Sort}
+\addcontentsline{toc}{section}{Experiment 6: Comparison of single pivot and dual pivot Quick Sort}
 
 
 This experiment compares a typical Quick Sort to a Quick Sort variant that has two pivot points. The experiment was performed on lists of increasing sizes from 0 to 1000, incrementing the length by ten each iteration. Each iteration was performed five times, with the result being the average of the runtimes for improved accuracy.
@@ -328,7 +329,7 @@ Observing the runtime, the difference between Quick Sort with a single pivot ver
 \stepcounter{section}
 \section*{Experiment \thesection}
 \label{exp7}
-\addcontentsline{toc}{section}{Experiment 7: Comparison of recursive and bottom-up Merge Sort implementations}
+\addcontentsline{toc}{section}{Experiment 7: Comparison of recursive and bottom up Merge Sort implementations}
 
 
 In this experiment, we compared the traditional recursive implementation of Merge Sort with a bottom up iterative version.
@@ -353,7 +354,7 @@ Most of the runtime cost comes from the linear merging process rather than recur
 \stepcounter{section}
 \section*{Experiment \thesection}
 \label{exp8}
-\addcontentsline{toc}{section}{Experiment 8: Comparison of Insertion Sort with Merge and Quick Sort on small near-sorted lists}
+\addcontentsline{toc}{section}{Experiment 8: Comparison of Insertion Sort with Merge and Quick Sort on small near sorted lists}
 
 
 In this experiment, we compared Insertion Sort with Merge Sort and Quick Sort on small, near sorted lists to determine when
@@ -382,15 +383,15 @@ All source code for this lab is located under the \texttt{lab\_1/src/} directory
 
 \begin{itemize}[leftmargin=*]
     \item \texttt{sorting/bad\_sorts.py}: Contains implementations of Bubble Sort, Selection Sort, Insertion Sort, and their optimized variants.
-    \item \texttt{sorting/good\_sorts.py}: Contains implementations of Merge Sort, Quick Sort, Heap Sort, Dual-Pivot Quick Sort, and Bottom-Up Merge Sort.
+    \item \texttt{sorting/good\_sorts.py}: Contains implementations of Merge Sort, Quick Sort, Heap Sort, DualvPivot Quick Sort, and Bottom Up Merge Sort.
     \item \texttt{experiments/experiment\_1.py}: Runtime comparison of Bubble, Selection, and Insertion Sort.
     \item \texttt{experiments/experiment\_2.py}: Comparison of original and optimized Bubble and Selection Sort implementations.
-    \item \texttt{experiments/experiment\_3.py}: Performance comparison on near-sorted lists with varying numbers of swaps.
+    \item \texttt{experiments/experiment\_3.py}: Performance comparison on near sorted lists with varying numbers of swaps.
     \item \texttt{experiments/experiment\_4.py}: Runtime comparison of Merge Sort, Quick Sort, and Heap Sort.
-    \item \texttt{experiments/experiment\_5.py}: Performance comparison on near-sorted lists for good sorting algorithms.
-    \item \texttt{experiments/experiment\_6.py}: Comparison of single-pivot and dual-pivot Quick Sort.
-    \item \texttt{experiments/experiment\_7.py}: Comparison of recursive and bottom-up Merge Sort implementations.
-    \item \texttt{experiments/experiment\_8.py}: Comparison of Insertion Sort with Merge and Quick Sort on small near-sorted lists.
+    \item \texttt{experiments/experiment\_5.py}: Performance comparison on near sorted lists for good sorting algorithms.
+    \item \texttt{experiments/experiment\_6.py}: Comparison of single pivot and dual pivot Quick Sort.
+    \item \texttt{experiments/experiment\_7.py}: Comparison of recursive and bottom up Merge Sort implementations.
+    \item \texttt{experiments/experiment\_8.py}: Comparison of Insertion Sort with Merge and Quick Sort on small near sorted lists.
 \end{itemize}
 
 

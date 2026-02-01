@@ -1,8 +1,8 @@
 \contentsline {section}{Experiment 1: Runtime comparison of Bubble, Selection, and Insertion Sort}{4}{section*.2}%
 \contentsline {section}{Experiment 2: Comparison of original and optimized Bubble and Selection Sort implementations}{4}{section*.4}%
-\contentsline {section}{Experiment 3: Performance comparison on near-sorted lists with varying numbers of swaps}{6}{section*.7}%
+\contentsline {section}{Experiment 3: Performance comparison on near sorted lists with varying numbers of swaps}{6}{section*.7}%
 \contentsline {section}{Experiment 4: Runtime comparison of Merge Sort, Quick Sort, and Heap Sort}{6}{section*.9}%
-\contentsline {section}{Experiment 5: Performance comparison on near-sorted lists for good sorting algorithms}{7}{section*.11}%
-\contentsline {section}{Experiment 6: Comparison of single-pivot and dual-pivot Quick Sort}{8}{section*.13}%
-\contentsline {section}{Experiment 7: Comparison of recursive and bottom-up Merge Sort implementations}{9}{section*.15}%
-\contentsline {section}{Experiment 8: Comparison of Insertion Sort with Merge and Quick Sort on small near-sorted lists}{10}{section*.17}%
+\contentsline {section}{Experiment 5: Performance comparison on near sorted lists for good sorting algorithms}{7}{section*.11}%
+\contentsline {section}{Experiment 6: Comparison of single pivot and dual pivot Quick Sort}{8}{section*.13}%
+\contentsline {section}{Experiment 7: Comparison of recursive and bottom up Merge Sort implementations}{9}{section*.15}%
+\contentsline {section}{Experiment 8: Comparison of Insertion Sort with Merge and Quick Sort on small near sorted lists}{10}{section*.17}%
