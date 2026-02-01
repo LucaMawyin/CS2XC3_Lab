@@ -228,7 +228,7 @@ For this experiment, we compared the runtime of Quick Sort, Merge Sort, and Heap
     \label{fig:1sort_graph_\thesection}
 \end{figure}
 
-Observing the resulting runtimes of each algorithm, they appear to be near-linear with a slight curve. This is an accurate depiction as each of the sorting algorithms represented have a runtime of $\BigO(n\log{n})$
+Observing the resulting runtimes of each algorithm, they appear to be near linear with a slight curve. This is an accurate depiction as each of the sorting algorithms represented have a runtime of $\BigO(n\log{n})$
 
 Heap Sort is the slowest sorting algorithm due to the constant overhead required in heap maintenance. Merge Sort is slower than Quick Sort due to the increased overhead of copying elements, along with having to zip sorted partitions of lists together, as opposed to centering the sort around a pivot and copying elements less. 
 
@@ -236,7 +236,7 @@ Heap Sort is the slowest sorting algorithm due to the constant overhead required
 \stepcounter{section}
 \section*{Experiment \thesection}
 
-In this experiment, Quick Sort, Merge Sort, and Heap Sort were compared using near-sorted lists of length 1000. There were 100 tests run for each algorithm, with an increasing number of swaps on an already-sorted list. The number of swaps ranged from 0 to 500, with an incrementation of five. Furthermore, each increment was executed five times, with the runtime averaged out in order to guarantee a higher accuracy.
+In this experiment, Quick Sort, Merge Sort, and Heap Sort were compared using near sorted lists of length 1000. There were 100 tests run for each algorithm, with an increasing number of swaps on an already-sorted list. The number of swaps ranged from 0 to 500, with an incrementation of five. Furthermore, each increment was executed five times, with the runtime averaged out in order to guarantee a higher accuracy.
 
 \begin{figure}[H]
     \centering
@@ -266,8 +266,8 @@ Observing the runtime, the difference between Quick Sort with a single pivot ver
 \stepcounter{section}
 \section*{Experiment \thesection}
 
-In this experiment, we compared the traditional recursive implementation of Merge Sort with a bottom-up iterative version.
-The bottom-up approach eliminates recursion by iteratively merging sublists using an increasing window size.
+In this experiment, we compared the traditional recursive implementation of Merge Sort with a bottom up iterative version.
+The bottom up approach eliminates recursion by iteratively merging sublists using an increasing window size.
 
 The experiment was conducted on randomly generated lists with lengths ranging from 0 to 5000, increasing by 50 each iteration.
 Each configuration was executed five times, and the minimum runtime was recorded to reduce noise from system interference.
@@ -275,11 +275,11 @@ Each configuration was executed five times, and the minimum runtime was recorded
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/Figure_7.png}
-    \caption{List Length vs. Time (ms) for recursive and bottom-up Merge Sort}
+    \caption{List Length vs. Time (ms) for recursive and bottom up Merge Sort}
     \label{fig:merge_exp7}
 \end{figure}
 
-As shown in Figure~\ref{fig:merge_exp7}, the bottom-up Merge Sort consistently outperforms the recursive version across all tested list sizes.
+As shown in Figure~\ref{fig:merge_exp7}, the bottom up Merge Sort consistently outperforms the recursive version across all tested list sizes.
 The improvement is modest, as both implementations share the same $\BigO(n\log n)$ time complexity.
 Most of the runtime cost comes from the linear merging process rather than recursion overhead, which limits the overall performance gain of the iterative approach.
 
