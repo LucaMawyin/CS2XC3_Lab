@@ -168,6 +168,37 @@ Bubble sort is the slowest as the inner loop, loops through the entire list ever
 \stepcounter{section}
 \section*{Experiment \thesection}
 
+In this experiment, we compared the original Bubble Sort and Selection Sort with their optimized variations.
+The Bubble Sort variation reduces the number of swaps by shifting elements, while the Selection Sort variation places both the minimum and maximum elements in each iteration.
+
+The experiment was performed on randomly generated lists with lengths ranging from 0 to 1000, increasing by 10 each time.
+All lists contained integers between 0 and 100000, and runtimes were measured in milliseconds.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Figure_2a_bubble.png}
+    \caption{List Length vs. Time (ms) for original Bubble Sort and its optimized variation}
+    \label{fig:bubble_exp2}
+\end{figure}
+
+Figure~\ref{fig:bubble_exp2} shows that the optimized Bubble Sort consistently outperforms the original version as the list size increases.
+This improvement is due to the reduced number of swap operations, which lowers the cost of memory accesses.
+Although both implementations exhibit quadratic growth, the optimization significantly improves performance in practice.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Figure_2b_Selection.png}
+    \caption{List Length vs. Time (ms) for original Selection Sort and the min+max variation}
+    \label{fig:selection_exp2}
+\end{figure}
+
+As shown in Figure~\ref{fig:selection_exp2}, the min max variation of Selection Sort provides a modest but consistent speedup over the original implementation.
+By placing two elements per iteration, the number of outer loop passes is reduced.
+However, the overall time complexity remains quadratic, limiting the performance improvement.
+
+In summary, both optimizations reduce constant overhead rather than asymptotic complexity.
+The Bubble Sort variation yields a more noticeable improvement, while the Selection Sort variation offers a smaller but stable performance gain.
+
 % Experiment 3
 \stepcounter{section}
 \section*{Experiment \thesection}
