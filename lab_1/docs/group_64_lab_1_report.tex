@@ -118,6 +118,18 @@
 %% are shown in the document (with a color, without underline). We put hyperref
 %% last---it has a tendency to break other packages when loaded before them.
 \usepackage[colorlinks]{hyperref}
+\hypersetup{
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+\usepackage{tocloft}
+% Make Table of Contents and List of Figures text blue
+\renewcommand{\cftsecfont}{\color{blue}}
+\renewcommand{\cftsecpagefont}{\color{blue}}
+
+\renewcommand{\cftfigfont}{\color{blue}}
+\renewcommand{\cftfigpagefont}{\color{blue}}
 \usepackage{graphicx}
 \usepackage{pgffor}
 \usepackage{caption}
@@ -147,10 +159,17 @@
     \Large \today\\[2cm]
 
 \end{titlepage}
+\tableofcontents
+\newpage
+
+\listoffigures
+\newpage
 
 % Experiment 1
 \stepcounter{section}
 \section*{Experiment \thesection}
+\addcontentsline{toc}{section}{Experiment \thesection}
+
 In our experiment comparing Bubble Sort, Insertion Sort, and Selection Sort. We ran 100 tests for each sorting algorithm going from a list length of 0, to a list length of 1000 each list length being 10 elements longer then the last.
 
 \begin{figure}[H]
@@ -167,10 +186,12 @@ Bubble sort is the slowest as the inner loop, loops through the entire list ever
 % Experiment 2
 \stepcounter{section}
 \section*{Experiment \thesection}
+\addcontentsline{toc}{section}{Experiment \thesection}
+
 
 In this experiment, we compared the original Bubble Sort and Selection Sort with their optimized variations.
 The Bubble Sort variation reduces the number of swaps by shifting elements, while the Selection Sort variation places both the minimum and maximum elements in each iteration.
-\\\\
+\par
 The experiment was performed on randomly generated lists with lengths ranging from 0 to 1000, increasing by 10 each time.
 All lists contained integers between 0 and 100000, and runtimes were measured in milliseconds.
 
@@ -195,13 +216,15 @@ Although both implementations exhibit quadratic growth, the optimization signifi
 As shown in Figure~\ref{fig:selection_exp2}, the min max variation of Selection Sort provides a modest but consistent speedup over the original implementation.
 By placing two elements per iteration, the number of outer loop passes is reduced.
 However, the overall time complexity remains quadratic, limiting the performance improvement.
-\\\\
+\par
 In summary, both optimizations reduce constant overhead rather than asymptotic complexity.
 The Bubble Sort variation yields a more noticeable improvement, while the Selection Sort variation offers a smaller but stable performance gain.
 
 % Experiment 3
 \stepcounter{section}
 \section*{Experiment \thesection}
+\addcontentsline{toc}{section}{Experiment \thesection}
+
 In our experiment comparing Bubble Sort, Insertion Sort, and Selection Sort on sorted lists with varying numbers of swaps made. We ran 109 tests for each sorting algorithm on lists of size 2000 with the number of swaps ranging from 0 - 10965. Each test would increase the number of swaps made by 100.
 
 \begin{figure}[H]
@@ -218,6 +241,8 @@ Selection Sort doesn't perform better with less swaps as the number of checks an
 % Experiment 4
 \stepcounter{section}
 \section*{Experiment \thesection}
+\addcontentsline{toc}{section}{Experiment \thesection}
+
 
 For this experiment, we compared the runtime of Quick Sort, Merge Sort, and Heap Sort. There were 100 tests run for each algorithm, with increasing list sizes from 0 to 1000, incrementing the list length by ten each iteration.
 
@@ -235,6 +260,8 @@ Heap Sort is the slowest sorting algorithm due to the constant overhead required
 % Experiment 5
 \stepcounter{section}
 \section*{Experiment \thesection}
+\addcontentsline{toc}{section}{Experiment \thesection}
+
 
 In this experiment, Quick Sort, Merge Sort, and Heap Sort were compared using near sorted lists of length 1000. There were 100 tests run for each algorithm, with an increasing number of swaps on an already-sorted list. The number of swaps ranged from 0 to 500, with an incrementation of five. Furthermore, each increment was executed five times, with the runtime averaged out in order to guarantee a higher accuracy.
 
@@ -250,6 +277,8 @@ Observing the runtime of each algorithm on sorted lists relative to the number o
 % Experiment 6
 \stepcounter{section}
 \section*{Experiment \thesection}
+\addcontentsline{toc}{section}{Experiment \thesection}
+
 
 This experiment compares a typical Quick Sort to a Quick Sort variant that has two pivot points. The experiment was performed on lists of increasing sizes from 0 to 1000, incrementing the length by ten each iteration. Each iteration was performed five times, with the result being the average of the runtimes for improved accuracy.
 
@@ -265,10 +294,12 @@ Observing the runtime, the difference between Quick Sort with a single pivot ver
 % Experiment 7
 \stepcounter{section}
 \section*{Experiment \thesection}
+\addcontentsline{toc}{section}{Experiment \thesection}
+
 
 In this experiment, we compared the traditional recursive implementation of Merge Sort with a bottom up iterative version.
 The bottom up approach eliminates recursion by iteratively merging sublists using an increasing window size.
-\\\\ 
+\par
 The experiment was conducted on randomly generated lists with lengths ranging from 0 to 5000, increasing by 50 each iteration.
 Each configuration was executed five times, and the minimum runtime was recorded to reduce noise from system interference.
 
@@ -287,11 +318,13 @@ Most of the runtime cost comes from the linear merging process rather than recur
 % Experiment 8
 \stepcounter{section}
 \section*{Experiment \thesection}
+\addcontentsline{toc}{section}{Experiment \thesection}
+
 
 In this experiment, we compared Insertion Sort with Merge Sort and Quick Sort on small, near sorted lists to determine when
 a quadratic time algorithm can outperform more efficient sorting algorithms. The experiment was conducted on lists with lengths ranging from 5 to 300,
 increasing by 5 each iteration.
-\\\\
+\par
 To favor Insertion Sort, the lists were generated to be near sorted using a small number of random swaps.
 Each configuration was executed five times, and the minimum runtime was recorded.
 
