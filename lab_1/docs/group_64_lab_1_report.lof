@@ -1,9 +1,9 @@
-\contentsline {figure}{\numberline {1}{\ignorespaces List Length vs. Time (ms) for Bubble, Selection, and Insertion Sort}}{3}{figure.caption.2}%
-\contentsline {figure}{\numberline {2}{\ignorespaces List Length vs. Time (ms) for original Bubble Sort and its optimized variation}}{4}{figure.caption.4}%
-\contentsline {figure}{\numberline {3}{\ignorespaces List Length vs. Time (ms) for original Selection Sort and the min+max variation}}{4}{figure.caption.5}%
-\contentsline {figure}{\numberline {4}{\ignorespaces List Length vs. Number of Swaps on a Sorted List for Bubble, Selection, and Insertion Sort.}}{5}{figure.caption.7}%
-\contentsline {figure}{\numberline {5}{\ignorespaces List Length vs. Time (ms) for Quick, Merge, and Heap Sort}}{6}{figure.caption.9}%
-\contentsline {figure}{\numberline {6}{\ignorespaces Swaps vs. Time (ms) for Quick, Merge, and Heap Sort}}{7}{figure.caption.11}%
-\contentsline {figure}{\numberline {7}{\ignorespaces Swaps vs. Time (ms) for Single and Dual Quick Sort}}{8}{figure.caption.13}%
-\contentsline {figure}{\numberline {8}{\ignorespaces List Length vs. Time (ms) for recursive and bottom up Merge Sort}}{9}{figure.caption.15}%
-\contentsline {figure}{\numberline {9}{\ignorespaces List Length vs. Time (ms) for Insertion, Merge, and Quick Sort on small near sorted lists}}{10}{figure.caption.17}%
+\contentsline {figure}{\numberline {1}{\ignorespaces List Length vs. Time (ms) for Bubble, Selection, and Insertion Sort}}{4}{figure.caption.3}%
+\contentsline {figure}{\numberline {2}{\ignorespaces List Length vs. Time (ms) for original Bubble Sort and its optimized variation}}{5}{figure.caption.5}%
+\contentsline {figure}{\numberline {3}{\ignorespaces List Length vs. Time (ms) for original Selection Sort and the min+max variation}}{5}{figure.caption.6}%
+\contentsline {figure}{\numberline {4}{\ignorespaces List Length vs. Number of Swaps on a Sorted List for Bubble, Selection, and Insertion Sort.}}{6}{figure.caption.8}%
+\contentsline {figure}{\numberline {5}{\ignorespaces List Length vs. Time (ms) for Quick, Merge, and Heap Sort}}{7}{figure.caption.10}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Swaps vs. Time (ms) for Quick, Merge, and Heap Sort}}{8}{figure.caption.12}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Swaps vs. Time (ms) for Single and Dual Quick Sort}}{9}{figure.caption.14}%
+\contentsline {figure}{\numberline {8}{\ignorespaces List Length vs. Time (ms) for recursive and bottom up Merge Sort}}{10}{figure.caption.16}%
+\contentsline {figure}{\numberline {9}{\ignorespaces List Length vs. Time (ms) for Insertion, Merge, and Quick Sort on small near sorted lists}}{11}{figure.caption.18}%

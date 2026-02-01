@@ -165,9 +165,37 @@
 \listoffigures
 \newpage
 
-% Experiment 1
+\newpage
+\section*{Executive Summary}
+
+\begin{itemize}[leftmargin=*]
+    \item Basic experiments show that sorting algorithms with quadratic time complexity become slow very quickly on random data, while algorithms with logarithmic time complexity scale much better as input size increases.
+    (\hyperref[exp1]{Experiment 1}, \hyperref[exp4]{Experiment 4})
+
+    \item The performance of quadratic time algorithms depends strongly on the input structure. Insertion Sort performs very well on small or nearly sorted lists, despite its worse theoretical complexity.
+    (\hyperref[exp3]{Experiment 3}, \hyperref[exp8]{Experiment 8})
+
+    \item Simple optimizations that reduce constant overhead can noticeably improve real world performance, even when the overall time complexity does not change.
+    (\hyperref[exp2]{Experiment 2})
+
+    \item Quick Sort is sensitive to input order because of its pivot selection, while Merge Sort behaves more consistently across different types of inputs.
+    (\hyperref[exp5]{Experiment 5}, \hyperref[exp8]{Experiment 8})
+
+    \item Using an iterative bottom up approach slightly improves Merge Sort performance by avoiding recursion overhead, although the improvement is limited.
+    (\hyperref[exp7]{Experiment 7})
+
+    \item More complex optimizations, such as dual pivot Quick Sort, do not provide enough performance improvement to justify their added implementation complexity.
+    (\hyperref[exp6]{Experiment 6})
+
+    \item Overall, the experiments show that practical sorting implementations benefit from hybrid strategies that choose different algorithms based on input size and structure.
+    (\hyperref[exp2]{Experiment 7}, \hyperref[exp8]{Experiment 8})
+\end{itemize}
+
+\newpage
+% Experiment 1 
 \stepcounter{section}
 \section*{Experiment \thesection}
+\label{exp1}
 \addcontentsline{toc}{section}{Experiment \thesection}
 
 In our experiment comparing Bubble Sort, Insertion Sort, and Selection Sort. We ran 100 tests for each sorting algorithm going from a list length of 0, to a list length of 1000 each list length being 10 elements longer then the last.
@@ -186,6 +214,7 @@ Bubble sort is the slowest as the inner loop, loops through the entire list ever
 % Experiment 2
 \stepcounter{section}
 \section*{Experiment \thesection}
+\label{exp2}
 \addcontentsline{toc}{section}{Experiment \thesection}
 
 
@@ -223,6 +252,7 @@ The Bubble Sort variation yields a more noticeable improvement, while the Select
 % Experiment 3
 \stepcounter{section}
 \section*{Experiment \thesection}
+\label{exp3}
 \addcontentsline{toc}{section}{Experiment \thesection}
 
 In our experiment comparing Bubble Sort, Insertion Sort, and Selection Sort on sorted lists with varying numbers of swaps made. We ran 109 tests for each sorting algorithm on lists of size 2000 with the number of swaps ranging from 0 - 10965. Each test would increase the number of swaps made by 100.
@@ -241,6 +271,7 @@ Selection Sort doesn't perform better with less swaps as the number of checks an
 % Experiment 4
 \stepcounter{section}
 \section*{Experiment \thesection}
+\label{exp4}
 \addcontentsline{toc}{section}{Experiment \thesection}
 
 
@@ -260,6 +291,7 @@ Heap Sort is the slowest sorting algorithm due to the constant overhead required
 % Experiment 5
 \stepcounter{section}
 \section*{Experiment \thesection}
+\label{exp5}
 \addcontentsline{toc}{section}{Experiment \thesection}
 
 
@@ -277,6 +309,7 @@ Observing the runtime of each algorithm on sorted lists relative to the number o
 % Experiment 6
 \stepcounter{section}
 \section*{Experiment \thesection}
+\label{exp6}
 \addcontentsline{toc}{section}{Experiment \thesection}
 
 
@@ -294,6 +327,7 @@ Observing the runtime, the difference between Quick Sort with a single pivot ver
 % Experiment 7
 \stepcounter{section}
 \section*{Experiment \thesection}
+\label{exp7}
 \addcontentsline{toc}{section}{Experiment \thesection}
 
 
@@ -318,6 +352,7 @@ Most of the runtime cost comes from the linear merging process rather than recur
 % Experiment 8
 \stepcounter{section}
 \section*{Experiment \thesection}
+\label{exp8}
 \addcontentsline{toc}{section}{Experiment \thesection}
 
 
