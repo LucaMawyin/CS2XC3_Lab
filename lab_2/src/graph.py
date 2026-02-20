@@ -1,4 +1,5 @@
 from collections import deque
+from random import randrange
 
 #Undirected graph using an adjacency list
 class Graph:
@@ -90,9 +91,9 @@ def MVC(G):
                 min_cover = subset
     return min_cover
 
-#######################################
-#             New Additons            #
-#######################################
+####################################################
+#             Pre PART 1 Implementation            #
+####################################################
 
 
 def BFS2(G, node1, node2):
@@ -179,11 +180,40 @@ def DFS3(G,node1):
 
 # TODO: is this right? since it's undirected isn't there being an edge mean it has a cycle (you can just go to a node and back)
 def has_cycle(G):
+    marked = {}
     for node in G.adj:
-        if G.adj[node]:
-            return True
+        marked[node] = False
+
+    def BFS3(node1):
+        nonlocal marked,G
+
+        Q = deque([node1])
+        marked[node1] = True
+        parent_node = node1
+        current_node = node1
+
+        while len(Q) != 0:
+            parent_node = current_node
+            current_node = Q.popleft()
+            for node in G.adj[current_node]:
+                if node == parent_node: continue
+
+                if marked[node]:
+                    return True
+                else:
+                    Q.append(node)
+                    marked[node] = True
+
+        return False
+
+    for node in G.adj:
+        if marked[node]: continue
+        if BFS3(node): return True
     
     return False
+
+        
+
 
 def is_connected(G):
     for node in G.adj:
@@ -191,6 +221,29 @@ def is_connected(G):
             return False
     
     return True
+
+
+#######################################
+#             Experiment 1            #
+#######################################
+
+def create_random_graph(i, j):
+    graph = Graph(i)
+    possible_edges = []
+    for x in range(i):
+        for y in range(x + 1,i):
+            possible_edges.append((x,y))
+    
+    for _ in range(j):
+        choice = randrange(len(possible_edges))
+        graph.add_edge(*possible_edges[choice])
+        possible_edges.pop(choice)
+
+    return graph
+
+
+
+
 
 
 #TODO: Probably should delete when we're done
@@ -234,9 +287,22 @@ if __name__ == "__main__":
 
     assert has_cycle(G)
 
-    G1 = Graph(3)
+    G1 = Graph(4)
     G1.add_edge(1,2)
+    assert not has_cycle(G1)
+    G1.add_edge(2,3)
+    assert not has_cycle(G1)
+    G1.add_edge(1,3)
     assert has_cycle(G1)
+
+
+    G3 = Graph(100)
+    for i in range(99):
+        G3.add_edge(i,i+1)
+    assert not has_cycle(G3)
+    G3.add_edge(99,0)
+    assert has_cycle(G3)
+    
 
     G2 = Graph(2)
     assert not is_connected(G2)

@@ -166,4 +166,25 @@
 \listoffigures
 \newpage
 
+
+\stepcounter{section}
+\section*{Experiment \thesection}
+\label{exp1}
+\addcontentsline{toc}{section}{Experiment \thesection: TODO}
+In our experiment finding probabilties of cycles existing in graph, we used the following parameters:
+\begin{itemize}
+\item  100 Nodes
+\item  ranging from 0 to 100 edges
+\item  running 1000 tests per edge amount
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Figure_\thesection.png}
+    \caption{Probabilties of cycles existing in graphs with 100 nodes}
+    \label{fig:graph_\thesection}
+\end{figure}
+
+you can see that at around 40 edges, the graph tops out meaning that it's almost assured that a random graph with 100 nodes and > 40 edges will have a cycle.
+
 \end{document}
