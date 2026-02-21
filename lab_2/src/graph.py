@@ -221,7 +221,7 @@ def is_connected(G):
 
 
 #######################################
-#             Experiment 1            #
+#           Experiment 1 & 2          #
 #######################################
 
 def create_random_graph(i, j):
