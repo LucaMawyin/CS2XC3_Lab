@@ -1,5 +1,6 @@
 from collections import deque
-from random import randrange
+import math
+import random
 
 #Undirected graph using an adjacency list
 class Graph:
@@ -216,11 +217,7 @@ def has_cycle(G):
 
 
 def is_connected(G):
-    for node in G.adj:
-        if len(BFS3(G,node)) < len(G.adj) - 1:
-            return False
-    
-    return True
+    return len(BFS3(G,next(iter(G.adj)))) >= len(G.adj) - 1
 
 
 #######################################
@@ -229,15 +226,19 @@ def is_connected(G):
 
 def create_random_graph(i, j):
     graph = Graph(i)
-    possible_edges = []
-    for x in range(i):
-        for y in range(x + 1,i):
-            possible_edges.append((x,y))
+    MAX_EDGES = i * (i - 1)//2
+
+    if j > MAX_EDGES: 
+        print("Maxxed out at",j)
+        j = MAX_EDGES
+
+    selected_indices = random.sample(range(MAX_EDGES), j)
     
-    for _ in range(j):
-        choice = randrange(len(possible_edges))
-        graph.add_edge(*possible_edges[choice])
-        possible_edges.pop(choice)
+    
+    for k in selected_indices:
+        u = i - 2 - int(math.floor((math.sqrt(-8*k + 4*i*(i-1)-7) / 2.0) - 0.5))
+        v = k + u + 1 - i*(i-1)//2 + (i-u)*(i-u-1)//2
+        graph.add_edge(u, v)
 
     return graph
 

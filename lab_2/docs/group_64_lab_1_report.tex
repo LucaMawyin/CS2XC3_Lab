@@ -188,25 +188,43 @@
 
 In our experiment finding probabilties of cycles existing in graph, we used the following parameters:
 \begin{itemize}
-\item  100 Nodes
+\item  200 Nodes
 \item  ranging from 0 to 100 edges
-\item  running 1000 tests per edge amount
+\item  running 10000 tests per edge amount
 \end{itemize}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/Figure_\thesection.png}
-    \caption{Probabilties of cycles existing in graphs with 100 nodes}
-    \label{fig:graph_\thesection}
+    \includegraphics[width=0.8\textwidth]{figures/Figure_\thesubsection.png}
+    \caption{Probabilties of cycles existing in graphs with 200 nodes}
+    \label{fig:graph_\thesubsection}
 \end{figure}
 
-You can see that at around 40 edges, the graph tops out meaning that it's almost assured that a random graph with 100 nodes and $>$ 40 edges will have a cycle.
+In \hyperref[fig:graph_\thesubsection]{Figure~\ref{fig:graph_\thesubsection}} at around 40 edges, the graph tops out meaning that it's very likely that a graph with 200 nodes and over 40 random edges will have a cycle. This is because each time a random edge is added, the chances of the edge creating a cycle increases, resulting in the S shaped curve in \hyperref[fig:graph_\thesubsection]{Figure~\ref{fig:graph_\thesubsection}}.
 
 \stepcounter{subsection}
 \subsection*{Experiment \thesubsection}
 \label{exp2}
 \addcontentsline{toc}{subsection}{Experiment \thesubsection: TODO}
+In our experiment finding probabilties of graphs being connected, we used the following parameters:
+\begin{itemize}
+\item 200 Nodes
+\item ranging from 0 to 1500
+\item doing 1000 tests every 10 edge amounts (0 edges, 10 edges, 20 edges, ..., 1000 edges )
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Figure_\thesubsection.png}
+    \caption{Probabilties of cycles existing in graphs with 100 nodes}
+    \label{fig:graph_\thesubsection}
+\end{figure}
 
+In \hyperref[fig:graph_\thesubsection]{Figure~\ref{fig:graph_\thesubsection}} at around 1000 edges, the graph tops out meaning that it's very likely that a graph with 200 nodes and over 1000 random edges will be connected. The graph with the max amount of edges possible without making it connected would look like a graph where every node is connected to every other node except for one specific node. To get this max number of edges, you set $N = \text{number of nodes}$ and plug it into $\frac{(N-1)(N-2)}{2}$, which gives us $19701$ for our experiment. Our experiment tops out much before this max though as the chances of fully connecting the entire graph with a single unique edge increase as the graph has more and more existing edges. This makes it very unlikley for more denser graphs($\geq 1000\text{ edges}$) to be unconnected.
+
+In \hyperref[fig:graph_\thesubsection]{Figure~\ref{fig:graph_\thesubsection}} the graph bottoms out until about 300 edges. This is because a graph cannot be connected if: $\text{number of edges} < \text{number of nodes} - 1$ and even if you have more edges then that if they are picked at random it's very unlikely for it to be connected. 
+
+
+\newpage
 \stepcounter{section}
 \section*{Part \thesection}
 \addcontentsline{toc}{section}{Part \thesection}
