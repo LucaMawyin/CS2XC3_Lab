@@ -138,6 +138,16 @@
 \usepackage{fancyhdr}
 \usepackage{float}
 
+%% Page numbering
+\pagestyle{fancy}
+\fancyhead[R]{\textit{Page \thepage}}
+\fancyhead[L]{\textit{LAB REPORT 2}}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\renewcommand{\thesubsection}{\arabic{subsection}}
+
 \begin{document}
 
 \begin{titlepage}
@@ -168,9 +178,14 @@
 
 
 \stepcounter{section}
-\section*{Experiment \thesection}
+\section*{Part \thesection}
+\addcontentsline{toc}{section}{Part \thesection}
+
+\stepcounter{subsection}
+\subsection*{Experiment \thesubsection}
 \label{exp1}
-\addcontentsline{toc}{section}{Experiment \thesection: TODO}
+\addcontentsline{toc}{subsection}{Experiment \thesubsection: TODO}
+
 In our experiment finding probabilties of cycles existing in graph, we used the following parameters:
 \begin{itemize}
 \item  100 Nodes
@@ -185,6 +200,15 @@ In our experiment finding probabilties of cycles existing in graph, we used the 
     \label{fig:graph_\thesection}
 \end{figure}
 
-you can see that at around 40 edges, the graph tops out meaning that it's almost assured that a random graph with 100 nodes and > 40 edges will have a cycle.
+You can see that at around 40 edges, the graph tops out meaning that it's almost assured that a random graph with 100 nodes and $>$ 40 edges will have a cycle.
+
+\stepcounter{subsection}
+\subsection*{Experiment \thesubsection}
+\label{exp2}
+\addcontentsline{toc}{subsection}{Experiment \thesubsection: TODO}
+
+\stepcounter{section}
+\section*{Part \thesection}
+\addcontentsline{toc}{section}{Part \thesection}
 
 \end{document}
