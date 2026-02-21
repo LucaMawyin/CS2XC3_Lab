@@ -1,9 +1,62 @@
 from graph import *
+import random
 
-# NOTE: GRAPH IS A DICTIONARY
+# NOTE: All algorithms assume every node in graph has at least 1 edge
 
 def approx1(G:Graph):
 
+    graphCopy = copyGraph(G)
+    C = set()
+
+    while not is_vertex_cover(G, C):
+        highestDegreeVertex = findHighestDegreeVertex(graphCopy)
+        C.add(highestDegreeVertex)
+
+        for neighbouringNode in graphCopy.adj[highestDegreeVertex]:
+            graphCopy.adj[neighbouringNode].remove(highestDegreeVertex)
+        graphCopy.adj[highestDegreeVertex] = []
+
+    return C
+
+def approx2(G:Graph):
+
+    C = set()
+
+    listOfNodes = list(G.adj.keys())
+    shuffledListOfNodes = random.sample(listOfNodes, len(listOfNodes))
+
+    while not is_vertex_cover(G,C):
+        C.add(shuffledListOfNodes.pop())
+
+    return C
+
+def approx3(G:Graph):
+
+    graphCopy = copyGraph(G)
+    C = set()
+
+    while not is_vertex_cover(G,C):
+        
+        randomNode = random.choice(list(graphCopy.adj.keys()))
+        while len(graphCopy.adj[randomNode]) == 0:
+            randomNode = random.choice(list(graphCopy.adj.keys()))
+        randomNodeNeighbour = random.choice(graphCopy.adj[randomNode])
+
+        C.add(randomNode)
+        C.add(randomNodeNeighbour)
+
+        for neighbouringNode in graphCopy.adj[randomNode]:
+            graphCopy.adj[neighbouringNode].remove(randomNode)
+
+        for neighbouringNode in graphCopy.adj[randomNodeNeighbour]:
+            graphCopy.adj[neighbouringNode].remove(randomNodeNeighbour)
+        
+        graphCopy.adj.pop(randomNode)
+        graphCopy.adj.pop(randomNodeNeighbour)
+
+    return C
+
+def findHighestDegreeVertex(G:Graph):
     highestDegreeVertex = None
     highestDegree = -1
 
@@ -13,10 +66,12 @@ def approx1(G:Graph):
             highestDegree = currentNodeDegree
             highestDegreeVertex = node
 
-    return "TODO: Implement approx1"
+    return highestDegreeVertex
 
-def approx2(G:Graph):
-    return "TODO: Implement approx2"
+def copyGraph(G:Graph):
+    graphCopy = Graph(len(G.adj))
 
-def approx3(G:Graph):
-    return "TODO: Implement approx3"
+    for node in G.adj:
+        graphCopy.adj[node] = G.adj[node].copy()
+
+    return graphCopy
