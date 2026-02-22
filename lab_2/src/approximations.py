@@ -35,23 +35,24 @@ def approx3(G:Graph):
     graphCopy = copyGraph(G)
     C = set()
 
-    while not is_vertex_cover(G,C):
+    while not is_vertex_cover(G,C) and (
+            any(len(graphCopy.adj[node]) > 0 for node in graphCopy.adj)
+        ):
         
-        randomNode = random.choice(list(graphCopy.adj.keys()))
-        while len(graphCopy.adj[randomNode]) == 0:
-            randomNode = random.choice(list(graphCopy.adj.keys()))
-        randomNodeNeighbour = random.choice(graphCopy.adj[randomNode])
+        nodesWithEdges = [node for node in graphCopy.adj if len(graphCopy.adj[node]) > 0]
+        randomNodeWithEdges = random.choice(nodesWithEdges)
+        randomNodeNeighbour = random.choice(graphCopy.adj[randomNodeWithEdges])
 
-        C.add(randomNode)
+        C.add(randomNodeWithEdges)
         C.add(randomNodeNeighbour)
 
-        for neighbouringNode in graphCopy.adj[randomNode]:
-            graphCopy.adj[neighbouringNode].remove(randomNode)
+        for neighbouringNode in graphCopy.adj[randomNodeWithEdges]:
+            graphCopy.adj[neighbouringNode].remove(randomNodeWithEdges)
 
         for neighbouringNode in graphCopy.adj[randomNodeNeighbour]:
             graphCopy.adj[neighbouringNode].remove(randomNodeNeighbour)
         
-        graphCopy.adj.pop(randomNode)
+        graphCopy.adj.pop(randomNodeWithEdges)
         graphCopy.adj.pop(randomNodeNeighbour)
 
     return C

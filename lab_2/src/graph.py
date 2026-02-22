@@ -1,5 +1,5 @@
 from collections import deque
-import math
+from random import randrange
 import random
 
 #Undirected graph using an adjacency list
@@ -24,8 +24,8 @@ class Graph:
             self.adj[node1].append(node2)
             self.adj[node2].append(node1)
 
-    def number_of_nodes():
-        return len()
+    def number_of_nodes(self):
+        return len(self.adj)
 
 
 #Breadth First Search
@@ -83,7 +83,7 @@ def is_vertex_cover(G, C):
     return True
 
 def MVC(G):
-    nodes = [i for i in range(G.get_size())]
+    nodes = [i for i in range(G.number_of_nodes())]
     subsets = power_set(nodes)
     min_cover = nodes
     for subset in subsets:
@@ -217,34 +217,46 @@ def has_cycle(G):
 
 
 def is_connected(G):
-    return len(BFS3(G,next(iter(G.adj)))) >= len(G.adj) - 1
+    for node in G.adj:
+        if len(BFS3(G,node)) < len(G.adj) - 1:
+            return False
+    
+    return True
 
 
 #######################################
-#           Experiment 1 & 2          #
+#             Experiment 1            #
 #######################################
 
 def create_random_graph(i, j):
     graph = Graph(i)
-    MAX_EDGES = i * (i - 1)//2
-
-    if j > MAX_EDGES: 
-        print("Maxxed out at",j)
-        j = MAX_EDGES
-
-    selected_indices = random.sample(range(MAX_EDGES), j)
+    possible_edges = []
+    for x in range(i):
+        for y in range(x + 1,i):
+            possible_edges.append((x,y))
     
-    
-    for k in selected_indices:
-        u = i - 2 - int(math.floor((math.sqrt(-8*k + 4*i*(i-1)-7) / 2.0) - 0.5))
-        v = k + u + 1 - i*(i-1)//2 + (i-u)*(i-u-1)//2
-        graph.add_edge(u, v)
+    for _ in range(j):
+        choice = randrange(len(possible_edges))
+        graph.add_edge(*possible_edges[choice])
+        possible_edges.pop(choice)
 
     return graph
 
 
 
+def create_random_graph2(i, j):
+    graph = Graph(i)
+    max_edges = i * (i - 1) // 2
+    if j > max_edges:
+        j = max_edges
 
+    possible_edges = [(x,y) for x in range(i) for y in range(x+1,i)]
+    chosen_edges = random.sample(possible_edges, j)
+
+    for u,v in chosen_edges:
+        graph.add_edge(u,v)
+
+    return graph
 
 
 #TODO: Probably should delete when we're done
