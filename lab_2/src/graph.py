@@ -82,6 +82,13 @@ def is_vertex_cover(G, C):
                 return False
     return True
 
+def is_independent_set(G, C):
+    for start in G.adj:
+        for end in G.adj[start]:
+            if start in C and end in C:
+                return False
+    return True
+
 def MVC(G):
     nodes = [i for i in range(G.number_of_nodes())]
     subsets = power_set(nodes)
@@ -91,6 +98,16 @@ def MVC(G):
             if len(subset) < len(min_cover):
                 min_cover = subset
     return min_cover
+
+def MIS(G):
+    nodes = [i for i in range(G.number_of_nodes())]
+    subsets = power_set(nodes)
+    maxSet = []
+    for subset in subsets:
+        if is_independent_set(G, subset):
+            if len(subset) > len(maxSet):
+                maxSet = subset
+    return maxSet
 
 ####################################################
 #             Pre PART 1 Implementation            #

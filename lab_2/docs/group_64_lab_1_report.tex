@@ -146,7 +146,7 @@
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
-\renewcommand{\thesubsection}{\arabic{subsection}}
+\newcounter{experiment}
 
 \begin{document}
 
@@ -181,10 +181,10 @@
 \section*{Part \thesection}
 \addcontentsline{toc}{section}{Part \thesection}
 
-\stepcounter{subsection}
-\subsection*{Experiment \thesubsection}
+\stepcounter{experiment}
+\subsection*{Experiment \theexperiment}
 \label{exp1}
-\addcontentsline{toc}{subsection}{Experiment \thesubsection: TODO}
+\addcontentsline{toc}{subsection}{Experiment \theexperiment}
 
 In our experiment finding probabilties of cycles existing in graph, we used the following parameters:
 \begin{itemize}
@@ -195,17 +195,17 @@ In our experiment finding probabilties of cycles existing in graph, we used the 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/Figure_\thesubsection.png}
-    \caption{Probabilties of cycles existing in graphs with 200 nodes}
-    \label{fig:graph_\thesubsection}
+    \includegraphics[width=0.8\textwidth]{figures/Figure_\theexperiment.png}
+    \caption{Probabilties of Cycles Existing in Graphs With 200 Nodes}
+    \label{fig:graph_\theexperiment}
 \end{figure}
 
-In \hyperref[fig:graph_\thesubsection]{Figure~\ref{fig:graph_\thesubsection}} at around 40 edges, the graph tops out meaning that it's very likely that a graph with 200 nodes and over 40 random edges will have a cycle. This is because each time a random edge is added, the chances of the edge creating a cycle increases, resulting in the S shaped curve in \hyperref[fig:graph_\thesubsection]{Figure~\ref{fig:graph_\thesubsection}}.
+In \hyperref[fig:graph_\theexperiment]{Figure~\ref{fig:graph_\theexperiment}} at around 40 edges, the graph tops out meaning that it's very likely that a graph with 200 nodes and over 40 random edges will have a cycle. This is because each time a random edge is added, the chances of the edge creating a cycle increases, resulting in the S shaped curve in \hyperref[fig:graph_\theexperiment]{Figure~\ref{fig:graph_\theexperiment}}.
 
-\stepcounter{subsection}
-\subsection*{Experiment \thesubsection}
+\stepcounter{experiment}
+\subsection*{Experiment \theexperiment}
 \label{exp2}
-\addcontentsline{toc}{subsection}{Experiment \thesubsection: TODO}
+\addcontentsline{toc}{subsection}{Experiment \theexperiment}
 In our experiment finding probabilties of graphs being connected, we used the following parameters:
 \begin{itemize}
 \item 200 Nodes
@@ -214,19 +214,106 @@ In our experiment finding probabilties of graphs being connected, we used the fo
 \end{itemize}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/Figure_\thesubsection.png}
-    \caption{Probabilties of cycles existing in graphs with 100 nodes}
-    \label{fig:graph_\thesubsection}
+    \includegraphics[width=0.8\textwidth]{figures/Figure_\theexperiment.png}
+    \caption{Probabilties of Cycles Existing in Graphs With 100 Nodes}
+    \label{fig:graph_\theexperiment}
 \end{figure}
 
-In \hyperref[fig:graph_\thesubsection]{Figure~\ref{fig:graph_\thesubsection}} at around 1000 edges, the graph tops out meaning that it's very likely that a graph with 200 nodes and over 1000 random edges will be connected. The graph with the max amount of edges possible without making it connected would look like a graph where every node is connected to every other node except for one specific node. To get this max number of edges, you set $N = \text{number of nodes}$ and plug it into $\frac{(N-1)(N-2)}{2}$, which gives us $19701$ for our experiment. Our experiment tops out much before this max though as the chances of fully connecting the entire graph with a single unique edge increase as the graph has more and more existing edges. This makes it very unlikley for more denser graphs($\geq 1000\text{ edges}$) to be unconnected.
+In \hyperref[fig:graph_\theexperiment]{Figure~\ref{fig:graph_\theexperiment}} at around 1000 edges, the graph tops out meaning that it's very likely that a graph with 200 nodes and over 1000 random edges will be connected. The graph with the max amount of edges possible without making it connected would look like a graph where every node is connected to every other node except for one specific node. To get this max number of edges, you set $N = \text{number of nodes}$ and plug it into $\frac{(N-1)(N-2)}{2}$, which gives us $19701$ for our experiment. Our experiment tops out much before this max though as the chances of fully connecting the entire graph with a single unique edge increase as the graph has more and more existing edges. This makes it very unlikley for more denser graphs($\geq 1000\text{ edges}$) to be unconnected.
 
-In \hyperref[fig:graph_\thesubsection]{Figure~\ref{fig:graph_\thesubsection}} the graph bottoms out until about 300 edges. This is because a graph cannot be connected if: $\text{number of edges} < \text{number of nodes} - 1$ and even if you have more edges then that if they are picked at random it's very unlikely for it to be connected. 
+In \hyperref[fig:graph_\theexperiment]{Figure~\ref{fig:graph_\theexperiment}} the graph bottoms out until about 300 edges. This is because a graph cannot be connected if: $\text{number of edges} < \text{number of nodes} - 1$ and even if you have more edges then that if they are picked at random it's very unlikely for it to be connected. 
 
 
 \newpage
 \stepcounter{section}
 \section*{Part \thesection}
 \addcontentsline{toc}{section}{Part \thesection}
+
+\stepcounter{experiment}
+\subsection*{Experiment \theexperiment}
+\addcontentsline{toc}{subsection}{Experiment \theexperiment}
+\label{exp3}
+
+In order to test the approximation algorithms, we used the following parameters:
+\begin{itemize}
+    \item Generate 1000 random graphs with 8 nodes and m edges, with incrementing edges from 1 to 30
+    \item Find the MVC for each graph and compare to the execution of each of the approx functions 
+\end{itemize} 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Figure_\theexperiment.png}
+    \caption{Vertex Cover Size in Graphs of Increasing Edges}
+    \label{fig:graph_\theexperiment}
+\end{figure}
+
+In \hyperref[fig:graph_\theexperiment]{Figure~\ref{fig:graph_\theexperiment}} the approx1 function seems to approximate the Vertex Cover Size (VCS) to be very similar to the Minimum Vertex Cover (MVC). This is likely due to the fact that the algorithm functions on selecting the node with the highest number of edges, which often results in a near-minimal set of edges. The other two algorithms result in a VCS substantially larger than the MVC, likely due to the randomness factor, which makes more optimal vertex selections less likely. However, as the number of edges in the graph increases, this disparity between the MVC and approx2 and approx3 decreases, likely because the concentration of edges is so high that it is difficult to make a poor decision on vertex selection, even with a randomness factor.
+
+\stepcounter{experiment}
+\subsection*{Experiment \theexperiment}
+\addcontentsline{toc}{subsection}{Experiment \theexperiment}
+
+This experiment better highlights the performance difference between each of the approximation algorithms. Instead of comparing all the Vertex Cover Sizes, each algorithm was compared to the MVC. Therefore, the relative performance of each algorithm can be better analyzed. All of the tests were run with the same parameters as \hyperref[exp3]{Experiment 3}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Figure_\theexperiment.png}
+    \caption{Relative Vertex Cover Size in Graphs of Increasing Edges}
+    \label{fig:graph_\theexperiment}
+\end{figure}
+
+As shown in \hyperref[fig:graph_\theexperiment]{Figure~\ref{fig:graph_\theexperiment}}, the relative VCS of each algorithm decreases as the number of edges in the graph increases. This is due to the fact that the higher concentration of edges relative to the number of nodes in the graph make it more difficult to select a "bad" edge.
+
+\stepcounter{experiment}
+\subsection*{Experiment \theexperiment}
+\addcontentsline{toc}{subsection}{Experiment \theexperiment}
+
+We can also test the approximation algorithms with varying number of nodes instead of edges. This experiment compares the VCS of all the algorithms (with the MVC) with varying number of nodes. In order to maintain a reasonable execution time, the number of edges allowed in a graph was half of the maximum number of total possible edges in a graph. The testing was run on 1000 different graphs, with each algorithm using the same graph as each other.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Figure_\theexperiment.png}
+    \caption{Vertex Cover Size in Graphs of Increasing Nodes}
+    \label{fig:graph_\theexperiment}
+\end{figure}
+
+Analyzing \hyperref[fig:graph_\theexperiment]{Figure~\ref{fig:graph_\theexperiment}}, the graph shows a linear trend for each algorithm. This is because as the node size is increasing, the number of edges increased proportionally. This means that the Vertex Cover Size will maintain the same relative size to the results of the rest of the algorithms.
+
+\subsection*{Worst Case of Approximation}
+\addcontentsline{toc}{subsection}{Worst Case of Approximation}
+
+In order to test the worst case for approx1() on a small graph of five nodes, you would have to calculate all possible graphs with 5 nodes. The maximum number of edges in a graph is expressed as:
+
+\begin{align*}
+    \text{max number of edges} &= \frac{n(n-1)}{2}\\
+    &= \frac{5(5-1)}{2}\\
+    &= \frac{20}{2}\\
+    &= 10
+\end{align*}
+
+Therefore, a graph with five nodes can have at most ten edges. Furthermore, within a graph an edge can either exist or not exist. This means that we can express the total number of graphs as $2^{10}$, as for every max number of edges in the, there exist two options for an edge's existance. This means that there are $1024$ total possible graphs of size ten. In order to test for this, you can enumerate each subset of edges in a graph. 
+
+\section*{Independent Set Problem}
+\addcontentsline{toc}{subsection}{Independent Set Problem}
+
+When understanding the basis of the Independent Set Problem, the relation between the Minimum Vertex Cover (MVC) and Maximum Independent Set (MIS) is extremely intuitive. The MIS is the largest set of nodes in a graph with edges that do not connect. This is effectively the opposite of the MVC, as the MVC is the smallest set of nodes in a graph that connects every to every edge. Subsequently, this would mean that set of nodes in MVC and the set of nodes in MIS converge such that $\text{MVC}\cup\text{MIS}=G$, where $G$ is the set of all nodes in the graph. Furthermore, in order to implement an MIS function, we can simply apply inverted logic to the already-existing MVC function.
+
+\begin{verbatim}
+def is_independent_set(G, C):
+    for start in G.adj:
+        for end in G.adj[start]:
+            if start in C and end in C:
+                return False
+    return True
+
+def MIS(G):
+    nodes = [i for i in range(G.number_of_nodes())]
+    subsets = power_set(nodes)
+    maxSet = []
+    for subset in subsets:
+        if is_independent_set(G, subset):
+            if len(subset) > len(maxSet):
+                maxSet = subset
+    return maxSet
+\end{verbatim}
 
 \end{document}
