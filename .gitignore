@@ -7,3 +7,4 @@ __pycache__/
 *.gz
 *.toc
 *.lof
+.DS_Store
