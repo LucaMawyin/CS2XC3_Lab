@@ -4,7 +4,7 @@ from lab3 import RBTree
 
 # For trees from lists of length 10000
 trials = 1000
-size = 10000
+size = 100
 bst_total = 0
 rbt_total = 0
 average_difference = 0

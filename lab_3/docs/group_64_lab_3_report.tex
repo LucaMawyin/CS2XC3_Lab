@@ -186,13 +186,23 @@
 \label{exp1}
 \addcontentsline{toc}{subsection}{Experiment \theexperiment}
 
+\subsubsection*{Outline}
 In this experiment, we analyzed the difference in height between a Binary Search Tree (BST) and a Red-Black Tree (RBT). The condition for the experiment is outlined as follows:
 
 \begin{itemize}
     \item Generate 1000 lists with 10000 unique random integers between 0 and 1000000.
-    \item For each list, create a BST and RBT by using the lists of integers.
-    \item Get the height of each tree and add it to a running sum of heights for each tree
+    \item For each list, create a BST and RBT by using the lists of integers and find the height of each tree.
+    \item Add the height of each tree, and the difference in height, to their respective running sum.
+    \item Divide all of the running sums by 1000 to find the average heights of the BST and RBT, and the average difference in height between the two.
 \end{itemize}
+\subsubsection*{Results}
+After running the experiment the average height for the BST was found to be 31.209, whilst the average height for the RBT was 27.966. This makes the average difference in height between the two types of trees 3.243.
+\subsubsection*{Discussion}
+The results of the expirement show that the average height of a BST is greater than that of a RBT. Although a difference of 3.243 does not seem substantial, this difference means that the BST is sized, on average, for $2^{3.243} \approx 9.4$ times more than the RBT. This means that the corresponding BST for an RBT having 10000 unique nodes would be sized for approximately 94000 unique nodes.
+
+However, this does not mean that a RBT is always better than a BST. When working will smaller datasets, the difference factor in heights between the two trees does not correspond to an absolute size difference that is as large. Furthermore, when using a RBT, there is a larger overhead when it comes to maintenance. This is because every time that a node is inserted into a RBT, the nodes must be recoloured and subtrees must be rotated to maintain the properties of a RBT. This gives an advantage to a BST when working with datasets where the values inserted are relatively random and uniformly distributed, as the height would also result in a logarithmic height, without the overhead of maintaining RBT properties.
+
+Ultimately the performance of a BST and RBT is relative to the use case. With smaller, or more random and uniformly distributed datasets, the lack of overhead in a BST may make it more efficient than a RBT. However, with large amounts of data, the smaller height of a RBT makes it much more space and time efficient than a BST.
 %\begin{figure}[H]
 %	\centering
 %	\includegraphics[width=0.8\textwidth]{figures/Figure_\theexperiment.png}
