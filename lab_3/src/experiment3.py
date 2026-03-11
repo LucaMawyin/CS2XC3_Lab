@@ -3,7 +3,7 @@ class XC3Node:
         self.degree = degree
         self.children = []
         
-        #Create childrend following the rule 
+        #Create childrend following the rules 
         for i in range (1, degree + 1):
             child_degree = i - 2 if i > 2 else 0
             self.children.append(XC3Node(child_degree))
