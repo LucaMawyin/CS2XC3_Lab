@@ -19,7 +19,9 @@ def get_num_nodes(node):
 for i in range(26):
     tree = XC3Node(i)
     h = get_height(tree)
-    print(f"degree={i}, height={h}")
+    n = get_num_nodes(tree)
+    print(f"degree={i}, height={h}, nodes={n}")
+
 
 
  

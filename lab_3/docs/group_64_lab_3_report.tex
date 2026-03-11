@@ -210,7 +210,108 @@ Ultimately the performance of a BST and RBT is relative to the use case. With sm
 %	\label{fig:graph_\theexperiment}
 %\end{figure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \stepcounter{experiment}    
 \subsection*{Experiment \theexperiment}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\stepcounter{experiment}
+\subsection*{Experiment \theexperiment}
+\label{exp3}
+\addcontentsline{toc}{subsection}{Experiment \theexperiment}
+
+\subsubsection*{Objective}
+The goal of this experiment is to construct XC3 Trees for degree 0 through 25, measure the henight of each tree, 
+and derive a close form equation $h(i)$ that returns the height of a degree $i$ XC3 Tree.
+
+\subsubsection*{Experimental Setup}
+XC3 Trees are defined recusively according to the following rules:
+\begin{itemize}
+    \item  If the root node has $i$ children, the tree has degree $i$.
+    \item Each chikd of the root is itself an XC3 Tree.
+    \item the $i$-th child of then rood has degree $(i-2)$ if $i > 2$, and degree 0 otherwise
+\end{itemize}
+
+Trees of degree 0 through 25 were implemented in Python using a recursive node class. The height of each tree was computed
+recursively as $1 + \max(\text{height of children})$, with a base case of 0 for leaf nodes (degree 0).
+
+\subsubsection*{Results}
+Table 1 presents the height $h(i)$ for XC3 Trees of degree $i = 0$ to $25$
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+Degree $i$ & Height $h(i)$ \\
+\hline
+0  & 0 \\
+1  & 1 \\
+2  & 1 \\
+3  & 2 \\
+4  & 2 \\
+5  & 3 \\
+6  & 3 \\
+7  & 4 \\
+8  & 4 \\
+9  & 5 \\
+10 & 5 \\
+11 & 6 \\
+12 & 6 \\
+13 & 7 \\
+14 & 7 \\
+15 & 8 \\
+16 & 8 \\
+17 & 9 \\
+18 & 9 \\
+19 & 10 \\
+20 & 10 \\
+21 & 11 \\
+22 & 11 \\
+23 & 12 \\
+24 & 12 \\
+25 & 13 \\
+\hline    
+\end{tabular}
+\caption{Heigh of XC3 Trees for degree $0$ to $25$.}
+\label{table:xc3height}
+\end{table}
+
+\subsubsection*{Derived Formula: $h(i) = \lceil i/2 \rceil$}
+
+Inspecting the data reveals a clear pattern: the height increases by 1 for every two additional degrees. 
+Specifically: Looking at the base cases, degree 0 has a height of 0. Then, degrees 1 and 2 both share 
+a height of 1,  while degrees 3 and 4 share a height of 2. Each odd degree adds one level of height
+compared to the previous even degree.
+$$h(i) = \left\lceil\frac{i}{2}\right\rceil$$
+
+\subsubsection*{Explaination}
+The formula $h(i) = \lceil i/2 \rceil$ follows directly from the recursive structure of XC3 Trees. The height of a
+degree $i$ tree is determined by its tallest subtree, which is always the last child. The last ($i$-th) child has degree
+$i - 2$, because by rule 3, the $i$-th child has degree $i - 2$ when $i > 2$.
+
+This gives the recurrence relation: 
+$$h(i) = 1 + h(i - 2), \quad \text{for } i > 2$$
+
+With the bases cases:
+$$h(0) = 0, \quad h(1) = 1, \quad h(2) = 1$$
+
+Since each recursive call reduces $i$ by 2, the total depth of recursion before reaching a base case is exactly $\lceil i/2 \rceil$.
+Therefore, the height grows by one for every two increments in degree, producing the ceiling division formula. 
+
+This means that a tree of an odd degree and the subsequent even degree share the same height (e.g., degrees 3 and 4 both have a height of 2),
+which is perfectly consistent with the results.
+
+\subsubsection*{Conclusion}
+The height of a degree $i$ XC3 Tree is $h(i) = \lceil i/2 \rceil$. While this result is straightforward, it establishes a key foundation:
+as the degree grows, the height grows only linearly in $i$. Combined with the node count pattern explored in Experiment 4, this will 
+allow us to reason about the relationship between $n$ (number of nodes) and height, and ultimately support an $O(\log n)$ height bound.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
 
 \end{document}
