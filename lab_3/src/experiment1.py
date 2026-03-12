@@ -1,6 +1,6 @@
 import random
 from bst import BST
-from lab3 import RBTree
+from rbt import RBTree
 
 # For trees from lists of length 10000
 trials = 1000
@@ -18,7 +18,7 @@ for _ in range(trials):
     for n in numbers:
         bst.insert(n)
         rbt.insert(n)
-    
+
     bst_total += bst.height()
     rbt_total += rbt.get_height()
     average_difference += bst.height() - rbt.get_height()
