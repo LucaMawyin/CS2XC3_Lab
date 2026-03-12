@@ -189,7 +189,7 @@
 \label{exp1}
 \addcontentsline{toc}{subsection}{Experiment \theexperiment}
 
-\subsubsection*{Outline}
+\subsubsection*{Objective}
 In this experiment, we analyzed the difference in height between a Binary Search Tree (BST) and a Red-Black Tree (RBT). The condition for the experiment is outlined as follows:
 
 \begin{itemize}
@@ -206,18 +206,34 @@ The results of the expirement show that the average height of a BST is greater t
 However, this does not mean that a RBT is always better than a BST. When working will smaller datasets, the difference factor in heights between the two trees does not correspond to an absolute size difference that is as large. Furthermore, when using a RBT, there is a larger overhead when it comes to maintenance. This is because every time that a node is inserted into a RBT, the nodes must be recoloured and subtrees must be rotated to maintain the properties of a RBT. This gives an advantage to a BST when working with datasets where the values inserted are relatively random and uniformly distributed, as the height would also result in a logarithmic height, without the overhead of maintaining RBT properties.
 
 Ultimately the performance of a BST and RBT is relative to the use case. With smaller, or more random and uniformly distributed datasets, the lack of overhead in a BST may make it more efficient than a RBT. However, with large amounts of data, the smaller height of a RBT makes it much more space and time efficient than a BST.
-%\begin{figure}[H]
-%	\centering
-%	\includegraphics[width=0.8\textwidth]{figures/Figure_\theexperiment.png}
-%	\caption{Probabilties of Cycles Existing in Graphs With 200 Nodes}
-%	\label{fig:graph_\theexperiment}
-%\end{figure}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \stepcounter{experiment}    
 \subsection*{Experiment \theexperiment}
+\addcontentsline{toc}{subsection}{Experiment \theexperiment}
+\subsubsection*{Objective}
+In this experiment, the difference in heights between BSTs and RBTs are being compared using lists with varying amounts of randomness. To run the experiment, the conditions are:
+\begin{itemize}
+    \item Perform each test 200 times
+    \item For each iteration of the test, generate 5 sorted lists of length 1000.
+    \item Perform $i\times{5}$ swaps on the list, where $i$ is the current iteration of the test.
+    \item Add the list to both a BST and RBT and find the average difference in height for each swap count.
+\end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection*{Results}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figures/Experiment2Graph.png}
+	\caption{Average Difference in Height in Trees of Increasing Randomness}
+	\label{fig:graph_\theexperiment}
+\end{figure}
+\subsubsection*{Discussion}
+Looking at the graph, it is clear that there is a large difference in heights between BST and RBT when there is a low number of swaps being performed on the list that is being inserted, with the BST having a much larger height. This is due to how values are inserted into the tree. With both the BST and RBT, we are iterating through the list, inserting the $i$th element into the tree. This means that for BSTs, a sorted list will result in the smallest value being the root node, and the tree resembling more of a linked list, where the height of the tree is equal to the length of the list being inserted. This does not happen with a RBT as every time that a new element is inserted, the tree is rebalanced. 
+
+The difference in height between BST and RBT are substantially lower when there is a higher number of swaps being performed on the list that is being inserted. This is because there is a more random distribution of numbers across the list that is being inserted. This benefits the BST, as this higher randomness makes it less likely that the first element in the list is the least value in the tree, and more so closer to the median value. The difference in heights becomes mostly insubstantial at around 500 swaps, likely because number of elements being swapped is comparable to the length of the list, making it much closer to a random ordering.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \stepcounter{section}
 \section*{Part \thesection}
 \addcontentsline{toc}{section}{Part \thesection}
@@ -429,13 +445,13 @@ $$h \le \frac{i + 1}{2} \implies h = O(i) = O(\log n)$$
 
 \subsubsection*{Conclusion}
 By establishing the inequality $n \ge \phi^i$, we prove that the degree $i$  grows at most as $O(\log_\phi n)$. Since the height $h$ is a linear function 
-of $i$ ($h \approx i/2$), the overall height of an XC3 Tree is
+of $i$ ($h \approx i/2$), the overall height of an XC3 Tree is:
 
-$$ h(n) = O(\log n)$$.
+$$ h(n) = O(\log n)$$
 
 This mean XC3 Trees, despite having a more complex branching structure than binary trees, are still well balanced. Their height grow only logarithmically
 with the numeber of nodes. This is a desirable property shared with self balancing binary trees such as RBT, confirming that XC3 trees are
-an efficient tree structure .
+an efficient tree structure.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -12,7 +12,7 @@ trials = 5
 swaps_list = []
 avg_diffs = []
 
-# Generating 1000 sorted lists of length 10 000
+# Generating 200 sorted lists of length 10 000
 for i in range(200):
     numberOfSwaps = i * 5
     total_diff = 0
@@ -37,6 +37,6 @@ for i in range(200):
 
 plt.plot(swaps_list, avg_diffs)
 plt.xlabel("Number of Swaps")
-plt.ylabel("Average Height Difference (BST - RBT)")
-plt.title("Average Height Difference vs List Disorder")
+plt.ylabel("Average Height Difference (BST - RBT)/Trials")
+plt.title("Average Height Difference vs Number of Swaps in Near Sorted List")
 plt.show()
