@@ -141,7 +141,7 @@
 %% Page numbering
 \pagestyle{fancy}
 \fancyhead[R]{\textit{Page \thepage}}
-\fancyhead[L]{\textit{LAB REPORT 2}}
+\fancyhead[L]{\textit{LAB REPORT 3}}
 \fancyfoot[C]{}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
@@ -174,6 +174,9 @@
 \newpage
 
 \listoffigures
+\newpage
+
+\listoftables
 \newpage
 
 
@@ -215,6 +218,10 @@ Ultimately the performance of a BST and RBT is relative to the use case. With sm
 \subsection*{Experiment \theexperiment}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\stepcounter{section}
+\section*{Part \thesection}
+\addcontentsline{toc}{section}{Part \thesection}
+
 \stepcounter{experiment}
 \subsection*{Experiment \theexperiment}
 \label{exp3}
@@ -229,7 +236,7 @@ XC3 Trees are defined recusively according to the following rules:
 \begin{itemize}
     \item  If the root node has $i$ children, the tree has degree $i$.
     \item Each chikd of the root is itself an XC3 Tree.
-    \item the $i$-th child of then rood has degree $(i-2)$ if $i > 2$, and degree 0 otherwise
+    \item the $i$ th child of then rood has degree $(i-2)$ if $i > 2$, and degree 0 otherwise
 \end{itemize}
 
 Trees of degree 0 through 25 were implemented in Python using a recursive node class. The height of each tree was computed
@@ -285,8 +292,8 @@ $$h(i) = \left\lceil\frac{i}{2}\right\rceil$$
 
 \subsubsection*{Explaination}
 The formula $h(i) = \lceil i/2 \rceil$ follows directly from the recursive structure of XC3 Trees. The height of a
-degree $i$ tree is determined by its tallest subtree, which is always the last child. The last ($i$-th) child has degree
-$i - 2$, because by rule 3, the $i$-th child has degree $i - 2$ when $i > 2$.
+degree $i$ tree is determined by its tallest subtree, which is always the last child. The last ($i$ th) child has degree
+$i - 2$, because by rule 3, the $i$ th child has degree $i - 2$ when $i > 2$.
 
 This gives the recurrence relation: 
 $$h(i) = 1 + h(i - 2), \quad \text{for } i > 2$$
@@ -306,12 +313,131 @@ as the degree grows, the height grows only linearly in $i$. Combined with the no
 allow us to reason about the relationship between $n$ (number of nodes) and height, and ultimately support an $O(\log n)$ height bound.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\stepcounter{experiment}
+\subsection*{Experiment \theexperiment}
+\label{exp4}
+\addcontentsline{toc}{subsection}{Experiment \theexperiment}
+\subsubsection*{Objective}
+This experiment has two goals. First, to construct XC3 Trees for degree 0 through 25, count the number of nodes in each tree,,
+and derive a closed formed equation $node(i)$. Secondly, to use the drived formula, together with the result from experiement 3, 
+to construct an arguement that the height of an XC3 tree with $n$ node is $O(\log n )$.
+
+\subsubsection*{Experiment Setup}
+Using the same recusive XC3 Tree implementation from experiment 3, the number of the nodes in each tree was computed recusively
+as : 1 + sum of node counts of all children. Trees of degree 0 through 25 were constructed and measured.
+
+\subsubsection*{Results}
+Table 2 presents $nodes(i)$ for degrees 0 through 25, alongside the corresponding Fibonacci number (Please see below)
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Degree $i$} & \textbf{$nodes(i)$} & \textbf{Fibonacci} \\
+\hline
+0  & 1      & $F(2)$  \\
+1  & 2      & $F(3)$  \\
+2  & 3      & $F(4)$  \\
+3  & 5      & $F(5)$  \\
+4  & 8      & $F(6)$  \\
+5  & 13     & $F(7)$  \\
+6  & 21     & $F(8)$  \\
+7  & 34     & $F(9)$  \\
+8  & 55     & $F(10)$ \\
+9  & 89     & $F(11)$ \\
+10 & 144    & $F(12)$ \\
+11 & 233    & $F(13)$ \\
+12 & 377    & $F(14)$ \\
+13 & 610    & $F(15)$ \\
+14 & 987    & $F(16)$ \\
+15 & 1597   & $F(17)$ \\
+16 & 2584   & $F(18)$ \\
+17 & 4181   & $F(19)$ \\
+18 & 6765   & $F(20)$ \\
+19 & 10946  & $F(21)$ \\
+20 & 17711  & $F(22)$ \\,3
+21 & 28657  & $F(23)$ \\
+22 & 46368  & $F(24)$ \\
+23 & 75025  & $F(25)$ \\
+24 & 121393 & $F(26)$ \\
+25 & 196418 & $F(27)$ \\
+\hline
+\end{tabular}
+\caption{Node count of XC3 Trees by degree.}
+\label{tab:xc3nodes}
+\end{table}
+
+\subsubsection*{Pattern: Fibonacci Numbers}
+Examining the values in table 1 immediately reveals as a well know pattern. The sequence 1, 2, 3, 5, 8, 13, 21, 34, 55, 89
+... is exactly the Fibonacci sequence, starting from $F(2)$.  The Fibonacci sequence is defined as:
+$$F(1) = 1, \quad F(2) = 1, \quad F(n) = F(n - 1) + F(n - 2) \quad \text{for } n > 2$$
+
+Using 1 indexed Fibonacci numbers where $F(1) = 1, F(2) = 2, F(3) = 3, F(4) = 5, \dots$
+the formula for the number of nodes in a degree $i$ XC3 tree is:
+$$nodes(i) = F (i + 2)$$ where $F(k)$ denotes the $k$ th Fibonacci number (with $F(1) = 1, F(2) = 2$).
+
+\subsubsection*{Explaination: why does this pattern arise ?}
+The fibonacci pattern is a direct consequence of the recursive structure of XC3 tree. We recall that a degree $i$ tree has
+children of degrees 0,0,1,2,3, \dots, $(i - 2)$. The total node count satisfies the recurrence:
+$$nodes (i) = 1 + nodes(0) + nodes(1) + \dots + nodes(i - 2)$$
+
+
+\textbf{By substraction (As per suggestion from our TA)} \\
+
+We can also prove this by substracting the recurrence. For a tree of degree $i$: 
+$$nodes(i) = 1 + 2 \cdot nodes (0) + nodes (1) + \dots + nodes (i - 2)$$ 
+Similarly, for a tree of degree $i$:
+$$node(i - 1) = 1 + 2 \cdot nodes (0) + nodes (1) + \dots + nodes(i - 3)$$
+Subtracting the second equation from the first, we can see that most terms cancel out and result: 
+$$nodes(i) - nodes(i - 1) = nodes(i - 2)$$
+Rearranging give the exact defition of the Fibonacci sequence: 
+$$nodes(i) = nodes (i - 1) + nodes (i - 2)$$ 
+
+
+\subsubsection*{ Argument : Heigh of XC3 tree is $O(\log n)$}
+We now combine the results of experiment 3 and 4 to argue that the height $n$ of an XC3 tree with $n$ nodes statisfies 
+$h = O(\log n)$. 
+
+\textbf{Step 1 — Express $n$ in terms of degree $i$.} \\
+From Experiment 4, we observed that the number of nodes in a degree $i$ tree
+follows the Fibonacci sequence:
+$$n = nodes(i) = F(i + 2)$$
+
+\textbf{Step 2 — Apply the Golden Ratio Inequality.} \\
+A well known property of Fibonacci numbers is their relationship with the
+Golden Ratio $\phi = (1 + \sqrt{5})/2 \approx 1.618$. For any
+$k \ge 2$, the Fibonacci sequence satisfies the following lower bound:
+$$F(k) \ge \phi^{k-2}$$
+Applying this to our node count formula where $k = i+2$:
+$$n = F(i+2) \ge \phi^{(i+2)-2} = \phi^i$$
+
+\textbf{Step 3 — Solve for degree $i$ using Logarithms.} \\
+Taking the logarithm base $\phi$ of both sides of the inequality $n \ge \phi^i$:
+$$\log_\phi(n) \ge i$$
+Since changing the base of a logarithm only involves a constant factor
+($\log_\phi n = \frac{\ln n}{\ln \phi}$), where $1/\ln \phi$ is a constant,
+we can conclude that:
+$$i = O(\log n)$$
+This demonstrates that the degree $i$ required to sustain $n$ nodes grows
+logarithmically with respect to $n$.
+
+\textbf{Step 4 — Connect degree to height.} \\
+From Experiment 3, the height of a degree $i$ XC3 Tree is:
+$$h(i) = \left\lceil \frac{i}{2} \right\rceil$$
+Substituting our bound $i = O(\log n)$ into this linear relationship:
+$$h \le \frac{i + 1}{2} \implies h = O(i) = O(\log n)$$
+
+\subsubsection*{Conclusion}
+By establishing the inequality $n \ge \phi^i$, we prove that the degree $i$  grows at most as $O(\log_\phi n)$. Since the height $h$ is a linear function 
+of $i$ ($h \approx i/2$), the overall height of an XC3 Tree is
+
+$$ h(n) = O(\log n)$$.
+
+This mean XC3 Trees, despite having a more complex branching structure than binary trees, are still well balanced. Their height grow only logarithmically
+with the numeber of nodes. This is a desirable property shared with self balancing binary trees such as RBT, confirming that XC3 trees are
+an efficient tree structure .
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
 
 \end{document}
