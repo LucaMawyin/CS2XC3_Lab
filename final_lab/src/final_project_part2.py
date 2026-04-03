@@ -14,7 +14,7 @@ class AStarElement():
 
     @key.setter
     def key(self, value):
-        self.g_score = value
+        self.g_score = value  # only change the g_score as decrease key shouldn't overwrite the heuristic values
 
     def __str__(self):
         return f"({self.value}, {self.g_score}, {self.h_score} | {self.key})"

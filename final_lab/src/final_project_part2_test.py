@@ -29,7 +29,7 @@ def calc_h(node):
     for onode in posses:
         ox, oy = posses[onode]
         dist = sqrt((sx - ox)**2 + (sy - oy)**2)
-        out_dict[onode] = dist * 0.5
+        out_dict[onode] = dist * 0.5  # needed as not all weights between nodes are >= their straight line distance in this example
 
     return out_dict
 
