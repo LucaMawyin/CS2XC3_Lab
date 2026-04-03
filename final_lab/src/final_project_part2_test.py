@@ -55,7 +55,7 @@ if __name__ == "__main__":
         for y in nodes:
             # print(x, y)
             _, dist = a_star(g, x, y, calc_h(y))
-            _, dists_map = dijkstra(g, x)
+            dists_map = dijkstra(g, x)
             # print(dists_map)
             assert dist == dists_map[y], f"failed on {x} -> {y}: {dist} != {dists_map[y]}"
 
