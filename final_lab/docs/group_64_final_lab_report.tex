@@ -217,5 +217,177 @@ Applications where A* should be used is when there exists a heurstic function th
 
 % A* is used in apps such as google maps for calculating the shortest route to a destination. In scenario's like shortest route calculators, the nodes of the graph would be intersections with their distances between them being the weights of the edges between them, and the heuristic function would return the straight line distance between the inputted node to the targeted node.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>     PART 3     <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\stepcounter{section}
+\section*{Part \thesection}
+\addcontentsline{toc}{section}{Part \thesection}
 
+\subsection*{Data and Graph Construction}
+We built a weighted graph from the London Tube data. Each station was treated as a node, and each 
+connection between two stations was treated as an edge. Using \texttt{london\_connections.csv}, we added 
+an edge whenever two stations were connected in the dataset. The weight of each edge was based on the 
+geographical distance between the two stations, which we computed using the latitude and longitude 
+values in \texttt{london\_stations.csv}. In our implementation, these connections were treated as bidirectional.
+
+This gave us a real transportation network to work with instead of a random graph. Because the London Tube 
+has both physical layout and line transfer structure, it was a good dataset for comparing Dijkstra's 
+algorithm and A* in a meaningful way.
+
+\subsection*{Heuristic Function}
+For each destination station \(d\), we built a heuristic dictionary for A*. The heuristic value of a node 
+was the straight line distance from that node to \(d\). This matches the suggestion in the project 
+description to use the physical ``as the crow flies'' distance as the heuristic.
+
+This is a reasonable heuristic for the London Tube graph because every station has real coordinates. A station 
+that is closer to the destination in physical distance is often a better direction to explore. Because of 
+this, A* gets useful guidance toward the goal, while Dijkstra does not use this extra information.
+
+\subsection*{Experimental Setup}
+We compared Dijkstra and A* on many source destination pairs in the London Tube graph. For each pair, we 
+recorded the runtime of both algorithms, rebuilt the shortest path, measured the path length, and counted 
+the minimum number of line transfers on that path. We grouped the journeys into three categories:
+\begin{itemize}
+    \item \textbf{Same line}: \(0\) transfers,
+    \item \textbf{One transfer}: \(1\) transfer,
+    \item \textbf{Several transfers}: \(2\) or more transfers.
+\end{itemize}
+
+Before studying the performance results, we checked that the implementation was correct. Our test suite showed 
+that the London data loaded correctly and that A* matched Dijkstra on sampled and additional 
+source destination pairs. After generating the full \texttt{part3\_results.csv} file, we also checked the 
+entire output. This check found \(0\) distance mismatches between Dijkstra and A*, and \(0\) invalid rows 
+with infinite distance or empty paths. Therefore, the results below are based on correct shortest path outputs.
+
+\subsection*{Results}
+Figure~\ref{fig:part3-path-length} shows the median runtime of both algorithms grouped by shortest path length. 
+In general, the median runtime increases as the path length increases. However, A* stays faster than Dijkstra 
+across almost the whole range of path lengths. This shows that the geographical heuristic is still useful even 
+for longer journeys.
+
+Figure~\ref{fig:part3-transfer-category} shows the median runtime grouped by transfer category. Same line trips 
+are the fastest for both algorithms, trips with one transfer are slower, and trips with several transfers are 
+the slowest. In all three categories, A* has a lower median runtime than Dijkstra.
+
+Figure~\ref{fig:part3-speedup} shows the speedup of A* over Dijkstra, where
+\[
+\text{speedup} = \frac{\text{Dijkstra runtime}}{\text{A* runtime}}.
+\]
+The median speedup is about \(1.3\times\) for same line trips, about \(1.8\times\) for trips with one transfer, 
+and about \(1.75\times\) for trips with several transfers. This means that A* is faster in all three categories, 
+and its advantage becomes larger when the trip is less direct.
+
+We also looked at runtime grouped by the exact number of transfers. The same pattern appeared there too: as 
+the number of transfers increased, the runtime of both algorithms usually increased, but A* still stayed faster 
+than Dijkstra.
+
+\subsection*{Discussion}
+Overall, our experiments show that A* was consistently faster than Dijkstra on the London Tube graph. The gap 
+between the two algorithms was smallest for short same line trips, where both algorithms had less work to do. 
+These were the cases where the two algorithms were the most similar. Even in these simpler cases, A* still had 
+an advantage.
+
+As trips became longer or needed more transfers, the difference between the two algorithms became larger. The 
+main reason is the geographical heuristic used by A*. Since the graph has real coordinate data, the straight line 
+distance to the destination gives a meaningful estimate of how far a node is from the goal. This helps A* move 
+in the right direction, while Dijkstra explores the graph more evenly and may spend more time on nodes that do 
+not help reach the destination quickly.
+
+The transfe based results support this idea. Same line trips are usually simpler and have fewer possible route 
+choices. Trips with one or several transfers are more complicated and create more possible intermediate routes. 
+In these harder cases, the heuristic becomes more useful because it helps A* avoid wasting time on less relevant 
+parts of the graph. This matches the speedup values in Figure~\ref{fig:part3-speedup}, where A* shows a bigger 
+advantage once the trip is no longer a direct same line journey.
+
+The path length results show the same idea in another way. Shorter paths are usually easier because the 
+algorithms can finish quickly. As the path length grows, the search space becomes larger and there are more 
+choices to consider. Because of this, the median runtime of both algorithms increases. However, the increase 
+is much larger for Dijkstra than for A*. This suggests that the heuristic becomes more useful as the trip 
+becomes longer and less direct.
+
+In our experiments, Dijkstra did not show strong evidence of being better than A* on typical journeys. The 
+closest cases were short same line trips, where their runtimes were the most similar. For this dataset, 
+A* appears to be the better practical choice when the goal is to find a path to one specific destination and a 
+useful heuristic is available.
+
+We included the line based part of the assignment by using the transfer count of the rebuilt shortest path. We 
+treated \(0\) transfers as a same line trip, \(1\) transfer as a one transfer trip, and \(2\) or more transfers 
+as a trip with several line changes. This helped us connect the algorithm results directly to the structure of 
+the London Tube system instead of only describing the graph in a general way.
+
+\subsection*{Limitations}
+One limitation of this experiment is that the edge weights were based on geographical distance instead of real 
+travel time. Because of this, the graph does not include waiting time, different train speeds, station delays, 
+or walking time during transfers. In the same way, the heuristic only uses straight line distance and does not 
+directly include transfer cost. Even with these simplifications, the heuristic still gave A* a clear advantage 
+on this dataset.
+
+\subsection*{Conclusion}
+In conclusion, the London Tube experiments show that A* is usually the better choice when a useful heuristic is 
+available. On this dataset, A* had lower median runtime than Dijkstra across different path lengths and across 
+different transfer categories. The difference was smallest for simple same line trips and larger for trips with 
+one or several transfers. These results support the idea that A* is especially useful on real transportation 
+networks where a good lower bound heuristic can be computed easily.
+
+% ------------------------- [ MAIN FIGURES FOR PART 3 ] ------------------------- %
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth]{./images/Part_3_Figure_3.png}
+    \caption{P3\_Median runtime by transfer category. A* is faster in all three groups.}
+    \label{fig:part3-transfer-category}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth]{./images/Part_3_Figure_4.png}
+    \caption{P3\_Median runtime by path length. A* remains faster across almost all path lengths.}
+    \label{fig:part3-path-length}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\linewidth]{./images/Part_3_Figure_5.png}
+    \caption{P3\_A* speedup by transfer category.}
+    \label{fig:part3-speedup}
+\end{figure}
+
+% ------------------------------------------------------------------------------- %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>     APPENDIX   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\appendix
+\section*{Appendix}
+\addcontentsline{toc}{section}{Appendix}
+
+\subsection*{Additional Figures for Part 3}
+The following figures provide extra detail for the Part 3 analysis. They are included in the appendix because they are useful for completeness, but they are less central to the main conclusions than
+ Figures~\ref{fig:part3-transfer-category}, \ref{fig:part3-path-length}, and \ref{fig:part3-speedup}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\linewidth]{./images/Part_3_Figure_1.png}
+    \caption{P3\_Downsampled runtime comparison of Dijkstra and A*.}
+    \label{fig:appendix-part3-runtime-downsampled}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\linewidth]{./images/Part_3_Figure_2.png}
+    \caption{P3\_Median runtime by exact number of transfers.}
+    \label{fig:appendix-part3-runtime-transfers}
+\end{figure}
+
+\subsection*{Code Navigation for Part 3}
+The code for Part 3 is organized as follows:
+\begin{itemize}
+    \item \texttt{final\_project\_part3.py}: loads the London Tube data, builds the weighted graph, creates the heuristic function, and runs the main Dijkstra vs A* experiment.
+    \item \texttt{final\_project\_part3\_test.py}: contains correctness tests for data loading and shortest-path comparisons between Dijkstra and A*.
+    \item \texttt{final\_project\_part3\_resultVerification.py}: checks the generated \texttt{part3\_results.csv} file for distance mismatches and invalid rows.
+    \item \texttt{final\_project\_part3\_test\_visualization.py}: reads the experiment output and generates the figures used in the report.
+    \item \texttt{part3\_results.csv}: stores the experiment results used for the analysis and plots.
+\end{itemize}
 \end{document}

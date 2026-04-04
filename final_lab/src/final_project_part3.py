@@ -168,10 +168,12 @@ def run_experiment(
     edge_lines,
     output_file="part3_results.csv",
     max_pairs=None,
+    progress_interval=1000,
 ):
     # Run Dijkstra and A* on many source-destination pairs and save the results
     nodes = list(stations.keys())
     pair_count = 0
+    heuristic_cache = {}
 
     with open(output_file, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
@@ -187,12 +189,15 @@ def run_experiment(
             "transfers",
         ])
 
-        for s in nodes:
-            for d in nodes:
+        for d in nodes:
+            if d not in heuristic_cache:
+                heuristic_cache[d] = calc_h(d, stations)
+
+            h = heuristic_cache[d]
+
+            for s in nodes:
                 if s == d:
                     continue
-
-                h = calc_h(d, stations)
 
                 start = time.perf_counter_ns()
                 d_pred, d_dist, d_visited = dijkstra_to_dest(G, s, d)
@@ -218,10 +223,14 @@ def run_experiment(
                 ])
 
                 pair_count += 1
+
+                if progress_interval is not None and pair_count % progress_interval == 0:
+                    print(f"Processed {pair_count} pairs...", flush=True)
+
                 if max_pairs is not None and pair_count >= max_pairs:
                     return
 
 if __name__ == "__main__":
     G, stations, edge_lines = load_london_data()
-    run_experiment(G, stations, edge_lines)
+    run_experiment(G, stations, edge_lines, max_pairs=None)
     print("part3_results.csv has been generated.")
