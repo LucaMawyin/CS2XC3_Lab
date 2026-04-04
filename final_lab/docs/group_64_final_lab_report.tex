@@ -176,22 +176,78 @@
 \listoffigures
 \newpage
 
-\listoftables
-\newpage
-
+\renewcommand{\thesubsection}{\arabic{subsection}}
 
 \stepcounter{section}
 \section*{Part \thesection}
 \addcontentsline{toc}{section}{Part \thesection}
 
+\stepcounter{subsection}
+\subsection*{Experiment Suite \thesubsection}
+\addcontentsline{toc}{subsection}{Experiment Suite \thesubsection}
+
 \stepcounter{experiment}
 \subsection*{Experiment \theexperiment}
-\label{exp1}
-\addcontentsline{toc}{subsection}{Experiment \theexperiment}
+\addcontentsline{toc}{subsubsection}{Experiment \theexperiment}
+
+\label{exp\theexperiment}
+
+\subsubsection*{Objective}
+In this experiment, we will compare both \texttt{dijkstra\_approx()} and \texttt{bellman\_ford\_approx()} to \texttt{dijkstra()} and \texttt{bellman\_ford()} respectively, with increasing values of $k$. This experiment was chosen in order to test if the approximation algorithms converge to their true counterparts when increasing $k$ of the approximation algorithms, and at what rate these changes occur at. The conditions for the experiment are outlined as follows:
+\begin{itemize}
+    \item Generate a sparse graph of 1000 nodes, with edge weights between 1 and 100
+    \item Each edge should be generated with a probability of 5\% 
+    \item Values of $k$ will increase from 1 to 20, with a step size of 1
+    \item For each value of $k$, we will calculate the total distance error between the approximation algorithms and the true algorithms.
+\end{itemize}
+\subsubsection*{Results}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Figure_1.png}
+    \caption{Distance Error of Approximation Algorithms with Increasing $k$}
+\end{figure}
+
+\newpage
+
+\subsubsection*{Discussion}
+Observing the graph, we can see that as $k$ increases, the average node distance error of both approximation algorithms decreases. However, this approximation error swiftly decreases, and plateaus by $k=8$ for Dijkstra, and $k=5$ for Bellman-Ford. 
+
+Considering the Dijkstra's approximation algorithm, this plateau is likely due to the fact that the approximation algorithm functions by performing Dijkstra's algorithm on the subgraph of the $k$ nearest neighbours of the current node being iterated through. This means that as $k$ increases, the approximation algorithm considers a much larger portion of the graph, therefore resulting in a much closer approximation to the true Dijkstra's algorithm. 
+
+Observing the Bellman-Ford approximation algorithm, this plateau is likely due to the nature of how the algorithm functions. The Bellman-Ford approximation algorithm functions by searching for the shortest path from the source node to the target using only $k$ edges, with $k$ increasing iteratively. Therefore on a sparse graph, as there are not many edges, the shortest path from the source to the target node is likely to be found within a very small number of edges, resulting in a very early plateau in the approximation error.
+
+\stepcounter{experiment}
+\subsection*{Experiment \theexperiment}
+\label{exp\theexperiment}
+\addcontentsline{toc}{subsubsection}{Experiment \theexperiment}
+
+\subsubsection*{Objective}
+In this experiment, we will compare both \texttt{dijkstra\_approx()} and \texttt{bellman\_ford\_approx()} to \texttt{dijkstra()} and \texttt{bellman\_ford()} respectively, with increasing graph density, and fixed values of $k$. The conditions for the experiment are outlined as follows:
+\begin{itemize}
+    \item Graph density will increase from 1\% to 10\%, with a step size of 1\% each iteration
+    \item For each graph density, generate a sparse graph with 500 nodes, with edge weights between 1 and 10
+    \item Values of $k$ will be 2, 5 and 10
+    \item For each graph density and value of $k$, we will calculate the total distance error between the approximate and true algorithms
+\end{itemize}
+\subsubsection*{Results}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Figure_2.png}
+    \caption{Distance Error of Approximation Algorithms with Increasing Density}
+\end{figure}
+\subsubsection*{Discussion}
+
+\stepcounter{experiment}
+\subsection*{Experiment \theexperiment}
+\label{exp\theexperiment}
+\addcontentsline{toc}{subsubsection}{Experiment \theexperiment}
 
 \subsubsection*{Objective}
 \subsubsection*{Results}
 \subsubsection*{Discussion}
+
+\subsection*{Mystery Algorithm}
+\addcontentsline{toc}{subsection}{Mystery Algorithm}
 
 \stepcounter{section}
 \section*{Part \thesection}
@@ -225,6 +281,7 @@ Applications where A* should be used is when there exists a heurstic function th
 \addcontentsline{toc}{section}{Part \thesection}
 
 \subsection*{Data and Graph Construction}
+\addcontentsline{toc}{subsection}{Data and Graph Construction}
 We built a weighted graph from the London Tube data. Each station was treated as a node, and each 
 connection between two stations was treated as an edge. Using \texttt{london\_connections.csv}, we added 
 an edge whenever two stations were connected in the dataset. The weight of each edge was based on the 
@@ -236,6 +293,7 @@ has both physical layout and line transfer structure, it was a good dataset for 
 algorithm and A* in a meaningful way.
 
 \subsection*{Heuristic Function}
+\addcontentsline{toc}{subsection}{Heuristic Function}
 For each destination station \(d\), we built a heuristic dictionary for A*. The heuristic value of a node 
 was the straight line distance from that node to \(d\). This matches the suggestion in the project 
 description to use the physical ``as the crow flies'' distance as the heuristic.
@@ -245,6 +303,7 @@ that is closer to the destination in physical distance is often a better directi
 this, A* gets useful guidance toward the goal, while Dijkstra does not use this extra information.
 
 \subsection*{Experimental Setup}
+\addcontentsline{toc}{subsection}{Experimental Setup}
 We compared Dijkstra and A* on many source destination pairs in the London Tube graph. For each pair, we 
 recorded the runtime of both algorithms, rebuilt the shortest path, measured the path length, and counted 
 the minimum number of line transfers on that path. We grouped the journeys into three categories:
@@ -261,6 +320,7 @@ entire output. This check found \(0\) distance mismatches between Dijkstra and A
 with infinite distance or empty paths. Therefore, the results below are based on correct shortest path outputs.
 
 \subsection*{Results}
+\addcontentsline{toc}{subsection}{Results}
 Figure~\ref{fig:part3-path-length} shows the median runtime of both algorithms grouped by shortest path length. 
 In general, the median runtime increases as the path length increases. However, A* stays faster than Dijkstra 
 across almost the whole range of path lengths. This shows that the geographical heuristic is still useful even 
@@ -283,6 +343,7 @@ the number of transfers increased, the runtime of both algorithms usually increa
 than Dijkstra.
 
 \subsection*{Discussion}
+\addcontentsline{toc}{subsection}{Discussion}
 Overall, our experiments show that A* was consistently faster than Dijkstra on the London Tube graph. The gap 
 between the two algorithms was smallest for short same line trips, where both algorithms had less work to do. 
 These were the cases where the two algorithms were the most similar. Even in these simpler cases, A* still had 
@@ -317,6 +378,7 @@ as a trip with several line changes. This helped us connect the algorithm result
 the London Tube system instead of only describing the graph in a general way.
 
 \subsection*{Limitations}
+\addcontentsline{toc}{subsection}{Limitations}
 One limitation of this experiment is that the edge weights were based on geographical distance instead of real 
 travel time. Because of this, the graph does not include waiting time, different train speeds, station delays, 
 or walking time during transfers. In the same way, the heuristic only uses straight line distance and does not 
@@ -324,6 +386,7 @@ directly include transfer cost. Even with these simplifications, the heuristic s
 on this dataset.
 
 \subsection*{Conclusion}
+\addcontentsline{toc}{subsection}{Conclusion}
 In conclusion, the London Tube experiments show that A* is usually the better choice when a useful heuristic is 
 available. On this dataset, A* had lower median runtime than Dijkstra across different path lengths and across 
 different transfer categories. The difference was smallest for simple same line trips and larger for trips with 
@@ -334,21 +397,21 @@ networks where a good lower bound heuristic can be computed easily.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.82\linewidth]{./images/Part_3_Figure_3.png}
+    \includegraphics[width=0.82\linewidth]{figures/Part_3_Figure_3.png}
     \caption{P3\_Median runtime by transfer category. A* is faster in all three groups.}
     \label{fig:part3-transfer-category}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.82\linewidth]{./images/Part_3_Figure_4.png}
+    \includegraphics[width=0.82\linewidth]{figures/Part_3_Figure_4.png}
     \caption{P3\_Median runtime by path length. A* remains faster across almost all path lengths.}
     \label{fig:part3-path-length}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.82\linewidth]{./images/Part_3_Figure_5.png}
+    \includegraphics[width=0.82\linewidth]{figures/Part_3_Figure_5.png}
     \caption{P3\_A* speedup by transfer category.}
     \label{fig:part3-speedup}
 \end{figure}
@@ -364,24 +427,26 @@ networks where a good lower bound heuristic can be computed easily.
 \addcontentsline{toc}{section}{Appendix}
 
 \subsection*{Additional Figures for Part 3}
+\addcontentsline{toc}{subsection}{Additional Figures for Part 3}
 The following figures provide extra detail for the Part 3 analysis. They are included in the appendix because they are useful for completeness, but they are less central to the main conclusions than
  Figures~\ref{fig:part3-transfer-category}, \ref{fig:part3-path-length}, and \ref{fig:part3-speedup}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\linewidth]{./images/Part_3_Figure_1.png}
+    \includegraphics[width=0.85\linewidth]{figures/Part_3_Figure_1.png}
     \caption{P3\_Downsampled runtime comparison of Dijkstra and A*.}
     \label{fig:appendix-part3-runtime-downsampled}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\linewidth]{./images/Part_3_Figure_2.png}
+    \includegraphics[width=0.85\linewidth]{figures/Part_3_Figure_2.png}
     \caption{P3\_Median runtime by exact number of transfers.}
     \label{fig:appendix-part3-runtime-transfers}
 \end{figure}
 
 \subsection*{Code Navigation for Part 3}
+\addcontentsline{toc}{subsection}{Code Navigation for Part 3}
 The code for Part 3 is organized as follows:
 \begin{itemize}
     \item \texttt{final\_project\_part3.py}: loads the London Tube data, builds the weighted graph, creates the heuristic function, and runs the main Dijkstra vs A* experiment.
