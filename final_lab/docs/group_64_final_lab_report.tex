@@ -286,7 +286,7 @@ The increasing number of edges for the graph is also why the relative distance e
 The A* Algorithm is an algorithm used find the shortest path from a start node to a target node in a directed weighted graph. It's algorithm is practically the same as Dijkstra's, the only difference is how it determines priority (the key value) in the priority queue.
 \\
 
-In A*, the key value used in the priority queue is equal to the total weight of the edges along the path traversed (like Dijkstra's) plus some value coming from a heuristic function which is a lower bound to the weight of the rest of the path to the target.
+In A*, the key value used in the priority queue is equal to the total weight of the edges along the path traversed (like Dijkstra's) plus some value coming from a heuristic function. This heurisitc function outputs a number which is larger for nodes which are further from the destination, guiding the algorithm to explore nodes that are closer to the destination and more likley along the shortest path.
 
 \subsubsection*{Issues A* addresses}
 \addcontentsline{toc}{subsubsection}{Issues A* addresses}
@@ -452,6 +452,41 @@ networks where a good lower bound heuristic can be computed easily.
 \end{figure}
 
 % ------------------------------------------------------------------------------- %
+
+\stepcounter{section}
+\section*{Part \thesection}
+\addcontentsline{toc}{section}{Part \thesection}
+
+
+\subsection*{Discussion}
+\addcontentsline{toc}{subsection}{Discussion}
+
+\subsubsection*{Figure 2's design principles and patterns}
+\addcontentsline{toc}{subsubsection}{Figure 2's design principles and patterns}
+In Figure 2, the design principles and paterns being used are:
+\begin{itemize}
+  \item \textbf{Strategy and Template Design Pattern:} The SPAlgorithm is a template strategy for the following strategies; Dijkstra's, Bellman Ford, and A* 
+  \item \textbf{Adapter Design Pattern:} In the assignment instructions, A*'s implementation is supposed to adapt its implementation in \textbf{Part 2}. Aswell in my implementation of \textbf{Bellman\_Ford} I decided to adapt its implementation from \textbf{Part 1}
+  \item \textbf{Abstraction Design Princple:} The \textbf{ShortPathFinder} Class is abstracted from the implmentation of the sorting algorithms and the graphs as their innerworkings are encapsulated within their class and hidden from \textbf{ShortPathFinder}
+\end{itemize}
+
+\subsubsection*{Robustness to future implementation's of different node representation}
+\addcontentsline{toc}{subsubsection}{Robustness to future implementation's of different node representation}
+If in the future we might need nodes to be represented as something other then integers, we can implment a class that is a decarator to \textbf{Graph}. All that this new class would have is an instance of \textbf{Graph} or its children, and a dictionary that maps each node's integer represntation in the graph to whatever you want to represent the node as (for example a string). You can then add a method to get the \textbf{Graph} instance for doing shortest path calculations and decorator methods to \textbf{Graph} (so you can for example add nodes with one function call giving a name as a string, which adds an integer to the \textbf{Graph} instance and a mapping to the name in the dictionary). 
+\\
+
+This way of handling this issue abstracts what nodes represent in a graph away from \textbf{Graph} and \textbf{SPAlgorithm}, keeping implementations of \textbf{Graph} and \textbf{SPAlgorithm} simple and avoiding the need to change their implmentation's.
+\\
+
+\subsubsection*{Potential Graph's that can be implemented}
+\addcontentsline{toc}{subsubsection}{Potential Graph's that can be implemented}
+we can implement many other graph's such as:
+\begin{itemize}
+    \item We can implement Directed Acyclic Graphs (no cycles), and Bipartite Graphs (can be split into independent sets of nodes where every edge connects a node from one set to the other set) by adding a method that returns a boolean if it follows their rules and/or preventing changes from being made that break the rules. 
+    \item We can implement Undirected graph's by just changing "add\_edge" to add two directed edges going both ways. 
+    \item We can implement Multigraphs which have can have multiple edges between two nodes. For example if you just want multiple weights, the "w" method would need to return a list of floats. We would also need to change "add\_edge" and how the weights are stored to support this. You may also want edge's to have unique identifiers if you want something like in the last section but instead you want different edge representations.
+\end{itemize}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>     APPENDIX   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
