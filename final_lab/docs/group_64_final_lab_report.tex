@@ -278,21 +278,31 @@ The increasing number of edges for the graph is also why the relative distance e
 \section*{Part \thesection}
 \addcontentsline{toc}{section}{Part \thesection}
 
+\subsection*{Discussion}
+\addcontentsline{toc}{subsection}{Discussion}
+
+\subsubsection*{How A* works}
+\addcontentsline{toc}{subsubsection}{How A* works}
 The A* Algorithm is an algorithm used find the shortest path from a start node to a target node in a directed weighted graph. It's algorithm is practically the same as Dijkstra's, the only difference is how it determines priority (the key value) in the priority queue.
 \\
 
 In A*, the key value used in the priority queue is equal to the total weight of the edges along the path traversed (like Dijkstra's) plus some value coming from a heuristic function which is a lower bound to the weight of the rest of the path to the target.
 
-A* does this to address a problem that Dijkstra has where it explores nodes that are obviously not on the shortest path. For example if I were to calculate the shortest route from Toronto to Hamilton with Dijktra's it'll probablys venture out to Scarborough before finding Hamilton which is obviously wrong. If I were to use A* though, I could use a heurisitc function that calculates the straight line distance to Hamilton. This heurisitc function would make A* prioritize exploring western locations (relative to Toronto) aside from exploring Scarborough. This would result in the shortest path being found much quicker.
-\\
+\subsubsection*{Issues A* addresses}
+\addcontentsline{toc}{subsubsection}{Issues A* addresses}
+A* addresses a problem that Dijkstra has where it explores nodes that are obviously not on the shortest path. For example if we were to calculate the shortest route from Toronto to Hamilton with Dijktra's it'll probably venture out to Scarborough before finding Hamilton which is obviously inefficient. If we were to use A* though, we could use a heurisitc function that calculates the straight line distance to Hamilton. This heurisitc function would make A* prioritize exploring western locations (relative to Toronto) aside from exploring Scarborough. This would result in the shortest path being found much quicker.
 
-You could empirically test the speed difference between A* to Dijkstra's by generating a varying number of points in 2D space, with random edges going between the two and running the algorithm on random starting and target nodes, comparing the execution times. It is important to note that for any node, it's heuristic value (straight line distance in this case) must be a lower bound to the sum of the weights of the path to the target node, otherwise A* could break and return a path that isn't the shortest.
-\\
+\subsubsection*{Empirically testing A* against Dijkstra's algorithm}
+\addcontentsline{toc}{subsubsection}{Empirically testing A* against Dijkstra's algorithm}
+You could empirically test the speed difference between A* to Dijkstra's algorithm by generating varying number of points in 2D space, with random edges going between the two and running the algorithm on random starting and target nodes, comparing the execution times. It is important to note that for any node, it's heuristic value (straight line distance in this case) must be a lower bound to the sum of the weights of the path to the target node, otherwise A* could break and return a path that isn't the shortest.
 
-If you generated an arbitrary heuristic function, A* could return the wrong result (same reason mentioned prior) and could also take longer then Dijktra's.
-\\
+\subsubsection*{Effects of an arbitrary heuristic function}
+\addcontentsline{toc}{subsubsection}{Effects of an arbitrary heuristic function}
+If you generated an arbitrary heuristic function, A* could return the wrong result if the function isn't a lower bound to the sum of the weights of the path to the target node. An arbitrary heuristic function could also push the algorithm to prioritize paths that aren't close to the shortest path, which can make it take a lot longer then Dijktra's algorithm.
 
-Applications where A* should be used is when there exists a heurstic function that is quick to compute, is always a lower bound to the weight of the shortest path from the inputted node to the target node, and the function decreases as you move to nodes closer to the target. This is why A* is so good for shortest route calculations because straight line distances are always the lower bound to the shortest route, straight line distances are easy to calculate ($O(1)$ via pythagorean theorem if you have cartesian coordinates) and it decreases as you get closer to the target node.    
+\subsubsection*{Applications where A* should be used instead of Dijkstra’s algorithm}
+\addcontentsline{toc}{subsubsection}{Applications where A* should be used instead of Dijkstra’s algorithm}
+A* should be used in applications where there exists a heurstic function that is quick to compute, is always a lower bound to the weight of the shortest path from the inputted node to the target node, and the function decreases as you move to nodes closer to the target. This is why A* is so good for shortest route calculations because straight line distances are always the lower bound to the shortest route, straight line distances are easy to calculate ($O(1)$ via pythagorean theorem if you have cartesian coordinates) and it decreases as you get closer to the target node.    
 
 
 
