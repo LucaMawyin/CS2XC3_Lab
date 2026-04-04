@@ -226,7 +226,7 @@ In this experiment, we will compare both \texttt{dijkstra\_approx()} and \texttt
 \begin{itemize}
     \item Graph density will increase from 1\% to 10\%, with a step size of 1\% each iteration
     \item For each graph density, generate a sparse graph with 500 nodes, with edge weights between 1 and 10
-    \item Values of $k$ will be 2, 5 and 10
+    \item Values of $k$ will be 1, 3 and 5
     \item For each graph density and value of $k$, we will calculate the total distance error between the approximate and true algorithms
 \end{itemize}
 \subsubsection*{Results}
@@ -236,6 +236,15 @@ In this experiment, we will compare both \texttt{dijkstra\_approx()} and \texttt
     \caption{Distance Error of Approximation Algorithms with Increasing Density}
 \end{figure}
 \subsubsection*{Discussion}
+Observing the graph, we can see that as graph density increases for all values of $k$, the distance error for the Bellman-Ford approximation decreases, while the distance error for Dijkstra's approximation increases.
+
+The reason for which the distance error for the Bellman-Ford approximation algorithm decreases is likely due to the fact that, as there are more edges present in the graph, there is more likely to be a more direct connection between two nodes. This increase in density within the graph means that the shortest path between nodes becomes shorter.
+
+The reason for which the distance error for Dijkstra's approximation algorithm increases is likely due to how the approximation algorithm functions. The approximation function for Dijkstra's is greedy. When a graph is less dense, each node has less edges, meaning that there are less candidate paths to explore, which will allow us to stay below our $k$ value. However, when a graph is much more dense, there are many more possible paths to check, meaning that we are likely to reach our threshold of relaxing earlier. This prevents us from finding more efficient paths, as a node cannot be updated once it reaches the threshold of $k$. 
+
+Ultimately, when we are limiting $k$ for each algorithm, the Bellman-Ford algorithm seems to perform better in more dense graphs, as the Total Distance Error is substantially lower than that of the Dijkstra approximation.
+
+\newpage
 
 \stepcounter{experiment}
 \subsection*{Experiment \theexperiment}
@@ -243,9 +252,25 @@ In this experiment, we will compare both \texttt{dijkstra\_approx()} and \texttt
 \addcontentsline{toc}{subsubsection}{Experiment \theexperiment}
 
 \subsubsection*{Objective}
+In this experiment, we will compare both \texttt{dijkstra\_approx()} and \texttt{bellman\_ford\_approx()} to \texttt{dijkstra()} and \texttt{bellman\_ford()} respectively, with increasing graph sizes, and fixed values of $k$. This experiment aims to highlight the trends of relative distance error between the approximation algorithms and their true counterparts, and observe how the number of nodes affects the algorithms ability to approximate the shortest paths. The conditions for the experiment are outlined as follows:
+\begin{itemize}
+    \item Graph size will increase from 100 nodes to 500 nodes, incrementing by 50 each iteration
+    \item The density will remain constant, at 5\%, with edge weights between 1 and 10
+    \item Values of k will be 1, 3, and 5
+    \item For each difference between the true and approximate error, we will normalize it with the number of nodes in the graph
+\end{itemize} 
 \subsubsection*{Results}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Figure_3.png}
+    \caption{Distance Error of Approximation Algorithms with Increasing Graph Size}
+\end{figure}
 \subsubsection*{Discussion}
+Observing the graph, it is evident that as the number of nodes increases, the relative distance error of the Bellman-Ford approximation algorithm decreases, while that of the Dijkstra approximation increases.
 
+The reason for which the relative distance error of the Bellman-Ford approximation algorithm decreases is likely for the same reason that it decreases when increasing graph density. As the graph density remains at 5\%, when the number of nodes increase, the number of edges also greatly increase. This means that larger graphs become very well connected, and as a result, shortest paths between nodes do not become much larger. This means that nodes are still reachable in few steps, resulting in the graph size not hindering the Bellman-Ford approximation algorithm.
+
+The increasing number of edges for the graph is also why the relative distance error for Dijkstra's approximation increases on larger graphs. When graphs are smaller, Dijkstra's approximation algorithm is able to exhaust a larger relative portion of the graph before reaching the limits given for the function. However on larger graphs, as there are more nodes and edges, it will reach these limits before it is able to explore a substantial relative portion of the graph. This means that only a small portion of the distance in a route can be relaxed, which becomes less substantial when the graph, and subsequently paths, are longer.
 \subsection*{Mystery Algorithm}
 \addcontentsline{toc}{subsection}{Mystery Algorithm}
 
