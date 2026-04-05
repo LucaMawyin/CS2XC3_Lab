@@ -388,7 +388,7 @@ distance to the destination gives a meaningful estimate of how far a node is fro
 in the right direction, while Dijkstra explores the graph more evenly and may spend more time on nodes that do 
 not help reach the destination quickly.
 
-The transfe based results support this idea. Same line trips are usually simpler and have fewer possible route 
+The transfer based results support this idea. Same line trips are usually simpler and have fewer possible route 
 choices. Trips with one or several transfers are more complicated and create more possible intermediate routes. 
 In these harder cases, the heuristic becomes more useful because it helps A* avoid wasting time on less relevant 
 parts of the graph. This matches the speedup values in Figure~\ref{fig:part3-speedup}, where A* shows a bigger 
@@ -513,14 +513,39 @@ The following figures provide extra detail for the Part 3 analysis. They are inc
     \label{fig:appendix-part3-runtime-transfers}
 \end{figure}
 
-\subsection*{Code Navigation for Part 3}
-\addcontentsline{toc}{subsection}{Code Navigation for Part 3}
-The code for Part 3 is organized as follows:
+\subsection*{Code Navigation}
+\addcontentsline{toc}{subsection}{Code Navigation}
+The source code is organized systematically by part as follows:
+
+\vspace{0.5em}
+\noindent\textbf{Part 1: Traditional Algorithms and Approximations}
 \begin{itemize}
-    \item \texttt{final\_project\_part3.py}: loads the London Tube data, builds the weighted graph, creates the heuristic function, and runs the main Dijkstra vs A* experiment.
-    \item \texttt{final\_project\_part3\_test.py}: contains correctness tests for data loading and shortest-path comparisons between Dijkstra and A*.
-    \item \texttt{final\_project\_part3\_resultVerification.py}: checks the generated \texttt{part3\_results.csv} file for distance mismatches and invalid rows.
-    \item \texttt{final\_project\_part3\_test\_visualization.py}: reads the experiment output and generates the figures used in the report.
-    \item \texttt{part3\_results.csv}: stores the experiment results used for the analysis and plots.
+    \item \texttt{final\_project\_part1.py}: Base graph class, Dijkstra, Bellman-Ford, and the mystery algorithm.
+    \item \texttt{final\_project\_part1\_approx.py}: Implements the \(k\)-relaxation limits for Dijkstra and Bellman-Ford.
+    \item \texttt{final\_project\_part1\_test1.py} to \texttt{test3.py}: Runs Experiment Suite 1 to test \(k\) values, densities, and sizes.
+\end{itemize}
+
+\noindent\textbf{Part 2: A* Algorithm Implementation}
+\begin{itemize}
+    \item \texttt{final\_project\_part2.py}: Implements the A* algorithm and the custom \texttt{AStarElement} priority queue element.
+    \item \texttt{final\_project\_part2\_test.py}: Validates A* correctness against Dijkstra using a sample graph.
+    \item \texttt{final\_project\_part2\_test\_visualization.py}: Generates a visual plot of the sample test graph.
+\end{itemize}
+
+\noindent\textbf{Part 3: London Tube Experiment}
+\begin{itemize}
+    \item \texttt{final\_project\_part3.py}: Loads London Tube data, builds the graph, and runs the all-pairs experiment.
+    \item \texttt{final\_project\_part3\_test.py}: Correctness tests for data loading and baseline shortest paths.
+    \item \texttt{part\_3\_resultVerify.py}: Checks the generated CSV file for distance mismatches or invalid paths.
+    \item \texttt{test\_visualization.py}: Reads results and generates the performance figures used in this report.
+    \item \texttt{london\_stations.csv} \& \texttt{london\_connections.csv}: Datasets used to build the graph.
+    \item \texttt{part3\_results.csv}: Stores the raw output data from the main experiment.
+\end{itemize}
+
+\noindent\textbf{Part 4: Code Refactoring and Design Patterns}
+\begin{itemize}
+    \item \texttt{final\_project\_part4.py}: Refactored OOP design, including \texttt{Graph}, \texttt{SPAlgorithm}, and \texttt{ShortPathFinder}.
+    \item \texttt{final\_project\_part4\_test.py}: Tests the refactored architecture to ensure all algorithms work correctly.
 \end{itemize}
 \end{document}
+gi
