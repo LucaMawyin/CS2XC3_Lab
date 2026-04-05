@@ -1,3 +1,4 @@
+from typing import Type
 import final_project_part1 as p1
 import final_project_part2 as p2
 import min_heap
@@ -105,3 +106,21 @@ class A_Star(SPAlgorithm):
         inp_graph.weights = graph.weights
         _, out = p2.a_star(inp_graph, source, dest, graph.get_heuristic())
         return out
+
+
+class ShortPathFinder():
+    def __init__(self, graph: Type[Graph] = None, algorithm: Type[SPAlgorithm] = None):
+        self.set_graph(graph)
+        self.set_algorithm(algorithm)
+
+    def calc_short_path(self, source: int, dest: int) -> float:
+        assert self.graph
+        assert self.algorithm
+
+        return self.algorithm.calc_sp(self.graph, source, dest)
+
+    def set_graph(self, graph: Graph):
+        self.graph = graph
+
+    def set_algorithm(self, algorithm: SPAlgorithm):
+        self.algorithm = algorithm
