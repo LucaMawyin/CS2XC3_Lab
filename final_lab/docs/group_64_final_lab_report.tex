@@ -273,7 +273,24 @@ The reason for which the relative distance error of the Bellman-Ford approximati
 The increasing number of edges for the graph is also why the relative distance error for Dijkstra's approximation increases on larger graphs. When graphs are smaller, Dijkstra's approximation algorithm is able to exhaust a larger relative portion of the graph before reaching the limits given for the function. However on larger graphs, as there are more nodes and edges, it will reach these limits before it is able to explore a substantial relative portion of the graph. This means that only a small portion of the distance in a route can be relaxed, which becomes less substantial when the graph, and subsequently paths, are longer.
 \subsection*{Mystery Algorithm}
 \addcontentsline{toc}{subsection}{Mystery Algorithm}
+\subsubsection*{All Shortest Paths Algorithm}
+\addcontentsline{toc}{subsubsection}{All Shortest Paths Algorithm}
+For designing an all-pairs-shortest path algorithm for a graph with positive edge weights, we can use Dijkstra's algorithm, iteratively. We can iterate through each node in our graph, with each source being the current node being iterated. In a similar logic, when introducing negative weights into the graph, we can use Bellman-Ford's algorithm iteratively for each node in the graph.
 
+\subsubsection*{Graph Complexity Analysis}
+\addcontentsline{toc}{subsubsection}{Graph Complexity Analysis}
+Given that Dijkstra has complexity $\Theta(E+V\log{V})$, or $\Theta(V^2)$ if the graph is dense, for the all-pairs-shortest path algorithm using Dijkstra the time complexity would be $\Theta(V^3)$. This is because as we need to iterate through each node in the graph, we also perform Dijkstra $V$ times. Similarly to Dijkstra, the all-pairs-shortest path algorithm implementing Bellman-Ford would have a time complexity of $\Theta(V^4)$. As stated before, as we iterate through each node in the graph, we must perform Bellman-Ford $V$ times, subsequently increasing our runtime to $\Theta(V^4)$.
+
+\subsubsection*{Mystery Algorithm Analysis}
+\addcontentsline{toc}{subsubsection}{Mystery Algorithm Analysis}
+We are given a mystery algority \texttt{mystery(G)}, and are expected to analyze how it functions. Observing the function, it is evident that it calculates the shortest distance between every pair of nodes in the graph. This is done by creating a 2D matrix of nodes where d[i][j] represents the shortest distance from i to j. For every node $i$, for every node $j$, the algorithm iterates through node $k$ to determine if it results in a shorter path from $i$ to $j$, and updates the matrix accordingly. To add some context for runtime, for every node in the graph, we are iterating through every other node in the graph. With this pair of nodes, we are now iterating through every remaining node to see if the distance from the first node to the second, and the second node to the third, is a shorter distance than from the first node to the second. This implies that the upper bound of the algorithm is likely $\Theta(V^3)$. This also becomes more evident when running a Log-Log Runtime Comparison using dense graphs as shown in Figure~\ref{fig:log-log-runtime}, as the runtime appears to scale similiarly to that of Dijkstra.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Figure_4.png}
+    \caption{Log-Log Runtime Comparison of Varying Algorithms}
+    \label{fig:log-log-runtime}
+\end{figure}
 \stepcounter{section}
 \section*{Part \thesection}
 \addcontentsline{toc}{section}{Part \thesection}
@@ -523,6 +540,7 @@ The source code is organized systematically by part as follows:
     \item \texttt{final\_project\_part1.py}: Base graph class, Dijkstra, Bellman-Ford, and the mystery algorithm.
     \item \texttt{final\_project\_part1\_approx.py}: Implements the \(k\)-relaxation limits for Dijkstra and Bellman-Ford.
     \item \texttt{final\_project\_part1\_test1.py} to \texttt{test3.py}: Runs Experiment Suite 1 to test \(k\) values, densities, and sizes.
+    \item \texttt{final\_project\_part1\_mystery\_test.py}: Runs Log-Log comparison to test runtimes of Bellman-Ford, Dijkstra, and Mystery algorithms.
 \end{itemize}
 
 \noindent\textbf{Part 2: A* Algorithm Implementation}
