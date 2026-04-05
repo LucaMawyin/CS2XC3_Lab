@@ -283,28 +283,26 @@ The increasing number of edges for the graph is also why the relative distance e
 
 \subsubsection*{How A* works}
 \addcontentsline{toc}{subsubsection}{How A* works}
-The A* Algorithm is an algorithm used find the shortest path from a start node to a target node in a directed weighted graph. It's algorithm is practically the same as Dijkstra's, the only difference is how it determines priority (the key value) in the priority queue.
+The A* Algorithm is an algorithm used find the shortest path from a start node to a target node in a directed weighted graph. Its algorithm is practically the same as Dijkstra's, the only difference is how it determines priority (the key value) in the priority queue.
 \\
 
-In A*, the key value used in the priority queue is equal to the total weight of the edges along the path traversed (like Dijkstra's) plus some value coming from a heuristic function. This heurisitc function outputs a number which is larger for nodes which are further from the destination, guiding the algorithm to explore nodes that are closer to the destination and more likley along the shortest path.
+In A*, the key value used in the priority queue is equal to the total weight along the path traversed (like Dijkstra's), plus some value coming from a heuristic function. This heurisitc function outputs a number relative to its distance from the destination, guiding the algorithm to explore nodes that are closer to the destination and more likley to be along the shortest path.
 
 \subsubsection*{Issues A* addresses}
 \addcontentsline{toc}{subsubsection}{Issues A* addresses}
-A* addresses a problem that Dijkstra has where it explores nodes that are obviously not on the shortest path. For example if we were to calculate the shortest route from Toronto to Hamilton with Dijktra's it'll probably venture out to Scarborough before finding Hamilton which is obviously inefficient. If we were to use A* though, we could use a heurisitc function that calculates the straight line distance to Hamilton. This heurisitc function would make A* prioritize exploring western locations (relative to Toronto) aside from exploring Scarborough. This would result in the shortest path being found much quicker.
+A* addresses a problem that Dijkstra has where it explores nodes that are clearly not on the shortest path. For example, if we were to calculate the shortest route from Toronto to Hamilton with Dijktra's it'll probably venture out to Scarborough before finding Hamilton, which is obviously inefficient. If we were to use A*, we can use a heurisitc function that calculates the straight line distance to Hamilton. This heurisitc function would make A* prioritize exploring western locations relative to Toronto, aside from exploring Scarborough. This would result in the shortest path being found much quicker.
 
 \subsubsection*{Empirically testing A* against Dijkstra's algorithm}
 \addcontentsline{toc}{subsubsection}{Empirically testing A* against Dijkstra's algorithm}
-You could empirically test the speed difference between A* to Dijkstra's algorithm by generating varying number of points in 2D space, with random edges going between the two and running the algorithm on random starting and target nodes, comparing the execution times. It is important to note that for any node, it's heuristic value (straight line distance in this case) must be a lower bound to the sum of the weights of the path to the target node, otherwise A* could break and return a path that isn't the shortest.
+You could empirically test the speed difference between A* and Dijkstra's algorithm by generating varying number of points in 2D space, with random edges going between the two and running the algorithm on random starting and target nodes, comparing the execution times. It is important to note that for any node, its heuristic value must be a lower bound to the total weight of the path to the target node, otherwise A* could break and return a path that isn't the shortest.
 
 \subsubsection*{Effects of an arbitrary heuristic function}
 \addcontentsline{toc}{subsubsection}{Effects of an arbitrary heuristic function}
-If you generated an arbitrary heuristic function, A* could return the wrong result if the function isn't a lower bound to the sum of the weights of the path to the target node. An arbitrary heuristic function could also push the algorithm to prioritize paths that aren't close to the shortest path, which can make it take a lot longer then Dijktra's algorithm.
+If you generated an arbitrary heuristic function, A* could return the wrong result if the function isn't a lower bound of the total weight of the path to the target node. An arbitrary heuristic function could also push the algorithm to prioritize paths that aren't close to the shortest, which can take a lot longer then Dijktra's algorithm.
 
 \subsubsection*{Applications where A* should be used instead of Dijkstra’s algorithm}
 \addcontentsline{toc}{subsubsection}{Applications where A* should be used instead of Dijkstra’s algorithm}
-A* should be used in applications where there exists a heurstic function that is quick to compute, is always a lower bound to the weight of the shortest path from the inputted node to the target node, and the function decreases as you move to nodes closer to the target. This is why A* is so good for shortest route calculations because straight line distances are always the lower bound to the shortest route, straight line distances are easy to calculate ($O(1)$ via pythagorean theorem if you have cartesian coordinates) and it decreases as you get closer to the target node.    
-
-
+A* should be used in applications where there exists a heurstic function that is quick to compute, is always a lower bound to the weight of the shortest path from the inputted node to the target node, and the function decreases as you move to nodes closer to the target. Because straight line distances are always the lower bound to the shortest route, they are easy to calculate ($O(1)$ via pythagorean theorem if you have cartesian coordinates) and they decrease as you get closer to the target node. This is why A* is so good for shortest route calculations.
 
 % A* is used in apps such as google maps for calculating the shortest route to a destination. In scenario's like shortest route calculators, the nodes of the graph would be intersections with their distances between them being the weights of the edges between them, and the heuristic function would return the straight line distance between the inputted node to the targeted node.
 
@@ -463,28 +461,28 @@ networks where a good lower bound heuristic can be computed easily.
 
 \subsubsection*{Figure 2's design principles and patterns}
 \addcontentsline{toc}{subsubsection}{Figure 2's design principles and patterns}
-In Figure 2, the design principles and paterns being used are:
+In Figure 2, the design principles and patterns being used are:
 \begin{itemize}
-  \item \textbf{Strategy and Template Design Pattern:} The SPAlgorithm is a template strategy for the following strategies; Dijkstra's, Bellman Ford, and A* 
-  \item \textbf{Adapter Design Pattern:} In the assignment instructions, A*'s implementation is supposed to adapt its implementation in \textbf{Part 2}. Aswell in my implementation of \textbf{Bellman\_Ford} I decided to adapt its implementation from \textbf{Part 1}
-  \item \textbf{Abstraction Design Princple:} The \textbf{ShortPathFinder} Class is abstracted from the implmentation of the sorting algorithms and the graphs as their innerworkings are encapsulated within their class and hidden from \textbf{ShortPathFinder}
+  \item \textbf{Strategy and Template Design Pattern:} The SPAlgorithm is a template strategy for the strategies implementing the following algorithms: Dijkstra's, Bellman Ford, and A* 
+  \item \textbf{Adapter Design Pattern:} In the assignment instructions, A*'s strategy is supposed to be adapted from its implementation in \textbf{Part 2}. I also decided to adapt \textbf{Bellman\_Ford} from its implementation in \textbf{Part 1}
+  \item \textbf{Abstraction Design Princple:} The \textbf{ShortPathFinder} Class is abstracted from the implementation of the sorting algorithms and the graphs. This is because their innerworkings are encapsulated within their class and hidden from \textbf{ShortPathFinder}
 \end{itemize}
 
-\subsubsection*{Robustness to future implementation's of different node representation}
-\addcontentsline{toc}{subsubsection}{Robustness to future implementation's of different node representation}
-If in the future we might need nodes to be represented as something other then integers, we can implment a class that is a decarator to \textbf{Graph}. All that this new class would have is an instance of \textbf{Graph} or its children, and a dictionary that maps each node's integer represntation in the graph to whatever you want to represent the node as (for example a string). You can then add a method to get the \textbf{Graph} instance for doing shortest path calculations and decorator methods to \textbf{Graph} (so you can for example add nodes with one function call giving a name as a string, which adds an integer to the \textbf{Graph} instance and a mapping to the name in the dictionary). 
+\subsubsection*{Robustness of the future implementation's of different node representation}
+\addcontentsline{toc}{subsubsection}{Robustness of the future implementation's of different node representation}
+If in the future, we may need nodes to be represented as something other then integers, we can implement a class that is a decorator to \textbf{Graph}. All this new class would have is an instance of \textbf{Graph} or its children, and a dictionary that maps each node's in-graph integer representation to whatever you want the node represented as. You can then add a method to get the \textbf{Graph} instance to do shortest path calculations, and decorator methods to \textbf{Graph} (e.g. add nodes with one function call giving a name as a string, which adds an integer to the \textbf{Graph} instance and a mapping to the name in the dictionary). 
 \\
 
-This way of handling this issue abstracts what nodes represent in a graph away from \textbf{Graph} and \textbf{SPAlgorithm}, keeping implementations of \textbf{Graph} and \textbf{SPAlgorithm} simple and avoiding the need to change their implmentation's.
+This solution abstracts what nodes represent in a graph away from \textbf{Graph} and \textbf{SPAlgorithm}, keeping implementations of \textbf{Graph} and \textbf{SPAlgorithm} simple and avoiding the need to change their implementations.
 \\
 
-\subsubsection*{Potential Graph's that can be implemented}
+\subsubsection*{Potential graphs that can be implemented}
 \addcontentsline{toc}{subsubsection}{Potential Graph's that can be implemented}
-we can implement many other graph's such as:
+We can implement many other graphs such as:
 \begin{itemize}
-    \item We can implement Directed Acyclic Graphs (no cycles), and Bipartite Graphs (can be split into independent sets of nodes where every edge connects a node from one set to the other set) by adding a method that returns a boolean if it follows their rules and/or preventing changes from being made that break the rules. 
-    \item We can implement Undirected graph's by just changing "add\_edge" to add two directed edges going both ways. 
-    \item We can implement Multigraphs which have can have multiple edges between two nodes. For example if you just want multiple weights, the "w" method would need to return a list of floats. We would also need to change "add\_edge" and how the weights are stored to support this. You may also want edge's to have unique identifiers if you want something like in the last section but instead you want different edge representations.
+    \item Directed Acyclic Graphs and Bipartite Graphs by adding a method that returns a boolean if it follows their rules and/or preventing changes from being made that break the rules. 
+    \item Undirected graph's by changing "add\_edge" to add two directed edges going both ways. 
+    \item Multigraphs which can have multiple edges between two nodes. One way is if you want duplicate edges with different weights, the "w" method would need to return a list of floats. We would also need to update the "add\_edge" method and how the weights are stored to support this. 
 \end{itemize}
 
 
